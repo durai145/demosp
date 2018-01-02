@@ -66,17 +66,4 @@ catch(e)
 
 };
 
-var pageId=4;
-var pageType='CRIT';
-var SchemaJson={Schema:'Dashboard'};
-var DataJson={DataJson:'Dashboard'};
-
-InvokeDB(pool,pageId,pageType,SchemaJson,DataJson,function(rslt,respSchemaJson, respDataJson)
-{
-
-	console.log(rslt);
-	console.log(respSchemaJson);
-	console.log(respDataJson);
-
-});
 exports.InvokeDB=InvokeDB;
