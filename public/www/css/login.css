@@ -227,7 +227,7 @@ body {
 
   .login_background
   {
-    background-image: url("../img/expense-claims.jpg");
+    background-image: url("../img/login_background.jpg");
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: auto 100%;
@@ -274,7 +274,7 @@ box-shadow: inset -3px 2px 132px 51px rgba(255,255,255,1);
 
        font-size: 15px;
       text-transform: uppercase;
-      color: #31708F;
+      color: rgb(213, 224, 230);
       font-weight: 600;
       margin-bottom: 30px;
 }
@@ -289,7 +289,9 @@ box-shadow: inset -3px 2px 132px 51px rgba(255,255,255,1);
     padding-bottom:80px;
   }
 
-
+.normal {
+    color: rgb(255, 255, 255);
+}
 .footer {
   position: absolute;
   bottom: 0;
