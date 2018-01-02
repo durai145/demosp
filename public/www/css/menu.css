@@ -175,9 +175,8 @@
  	border: 1px solid #acdd4a;
 	position: absolute;
 
-	background: #6eac2c url(../img/header_bg.jpg) 100% 100% no-repeat;
+/*	background: #6eac2c url(../img/header_bg.jpg) 100% 100% no-repeat;*/
 	background-size:1440px 175px ;
-  //2346 × 418px
 	font-weight: normal;
 	size:50px;
 	height : 175px;
