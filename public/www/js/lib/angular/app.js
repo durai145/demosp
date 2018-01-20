@@ -96,34 +96,14 @@ else if(jsonSchema== "result")
 {
  schemaJson=eval(' [{"group":"USS","name":"result","label":"Result","task":"ES","desc":"","htmlType":"CONTAINER","entitle":"NONREADONLY","enttlname":"","mndf":"N","dataType":"PAGE","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[{"group":"USS","name":"TIRACK","label":"TIRACK","task":"NONE","desc":"","htmlType":"TEXT","entitle":"READONLY","enttlname":"","mndf":"N","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"||A|A-ADD|M|M-MODIFY|I|I-INQURY|C|C-CANCEL|V|V-VERIFY","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"signature ","label":"Signature Calculated","task":"NONE","desc":"","htmlType":"TEXT","entitle":"READONLY","enttlname":"","mndf":"N","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"||A|A-ADD|M|M-MODIFY|I|I-INQURY|C|C-CANCEL|V|V-VERIFY","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"signature ","label":"Signature (DB)","task":"NONE","desc":"","htmlType":"TEXT","entitle":"READONLY","enttlname":"","mndf":"N","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"||A|A-ADD|M|M-MODIFY|I|I-INQURY|C|C-CANCEL|V|V-VERIFY","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"resultDiv","label":"Result","task":"NONE","desc":"","htmlType":"DIV","entitle":"READONLY","enttlname":"","mndf":"N","dataType":"TEXT","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"||A|A-ADD|M|M-MODIFY|I|I-INQURY|C|C-CANCEL|V|V-VERIFY","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]}]}]');
 }
-    
-
-
-   // alert(GenHtmlTemplateFromSJson);
-
-   var usResource= eval(    "[{" +us.frameGenerationResoure(schemaJson[0].childs,
-  schemaJson[0]
-)  +"}]" );
-
-
-var  usListVal=eval("[{"+us.frameGenerationListVal(schemaJson[0].childs,
-    schemaJson[0]
-)  + "}]"); 
-
-
-
-var OutJson=    eval( "[{" +us.frameGenerationJson(schemaJson[0].childs,
-  schemaJson[0]
-) +"}]");
+var usResource= us.frameGenerationResoure(schemaJson[0].childs,schemaJson[0]);
+var  usListVal=us.frameGenerationListVal(schemaJson[0].childs,schemaJson[0]) ;
+var OutJson= us.frameGenerationJson(schemaJson[0].childs,schemaJson[0]); 
 
 var func=value;
-//alert(func);
-var inpUsListVal  = eval("usListVal[0]."+ schemaJson[0].name) ;
-var inpUsResource = eval("usResource[0]."+ schemaJson[0].name) ;
-var inpOutJson    = eval("OutJson[0]."+ schemaJson[0].name) ;
-var ussScript=us.frameGeneration(inpUsListVal
-                                              ,inpUsResource
-                                              ,inpOutJson 
+var ussScript=us.frameGeneration(usListVal[schemaJson[0].name]
+                                              ,usResource[schemaJson[0].name]
+                                              ,OutJson[schemaJson[0].name]
                                               ,schemaJson[0].childs
                                               ,schemaJson[0]
                                               ,0

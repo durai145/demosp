@@ -79,11 +79,6 @@ app.all('*', function (req, res, next) {
 		browser += "ANDROID";
 	}
 	browser += " " + useragent.is(req.headers['user-agent']).version;
-
-
-	//console.log("BROWSER = " +  browser);
-	//console.log("OS      = " + agent.os.toString());
-	//console.log("Device  = " + agent.device.toString());
 	if (geo == null) {
 
 		geo = {
@@ -92,8 +87,6 @@ app.all('*', function (req, res, next) {
 			region: 'NA'
 		};
 	}
-
-
 
 	var BrowserInfo = {
 		BRWSR_NAME: browser,
@@ -114,13 +107,7 @@ app.all('*', function (req, res, next) {
 		GEO_DTL: req.headers['user-agent'],
 		GEO_REGION: geo.region
 	};
-
 	res.locals.BrowserInfo = BrowserInfo;
-
-
-
-
-
 	next();
 
 });
