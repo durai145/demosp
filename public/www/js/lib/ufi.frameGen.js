@@ -25,7 +25,8 @@ define(function (require, exports, module) {
 			desc: '',
 			htmlType: 'PARENT',
 			entitle: 'READONLY',
-			enttlname: '',
+			enttlname: 255,
+			editorRole: 255,
 			mndf: 'N',
 			dataType: 'CONTAINER',
 			cclass: 'ctable',
@@ -69,6 +70,7 @@ define(function (require, exports, module) {
 			htmlType: 'PARENT',
 			entitle: 'READONLY',
 			enttlname: 0xFF,
+			editorRole: 0xFF,
 			mndf: 'N',
 			dataType: 'CONTAINER',
 			cclass: 'ctable',
@@ -148,13 +150,13 @@ define(function (require, exports, module) {
 		return retObj;
 	}
 
-	FG.prototype.listValToJson = function(listVal) {
-		var retJson={};
-		var key="";
-		listVal.split("|").forEach(function(listValObj,i){
-			if (i%2==0) {
-				key=listValObj;
-			} else { 
+	FG.prototype.listValToJson = function (listVal) {
+		var retJson = {};
+		var key = "";
+		listVal.split("|").forEach(function (listValObj, i) {
+			if (i % 2 == 0) {
+				key = listValObj;
+			} else {
 				if (key == "") {
 					retJson["NONE"] = "NONE";
 				} else {
@@ -183,7 +185,7 @@ define(function (require, exports, module) {
 		return returnStr
 	}
 
-	FG.prototype.frameField = function (recSch, varStrVal, varLabelStrVal, varStrListVal, func, level) {
+	FG.prototype.frameField = function (recSch, varStrVal, varLabelStrVal, varStrListVal, func, level, mode, role) {
 		this.debug('frameField start');
 		var lv_str = "";
 		if (varStrVal === undefined)
@@ -191,7 +193,6 @@ define(function (require, exports, module) {
 		if ((recSch.col % recSch.maxCol) == 1) {
 			lv_str += "\n USSTableRow" + level + " = us.USSCreateTableRow_();	";
 		}
-
 		if (recSch.col == 1) {
 			lv_str += "\n USSTableRow" + level + " = new  us.USSCreateTableRow_();	";
 		}
@@ -202,12 +203,13 @@ define(function (require, exports, module) {
 		lv_str += "\n USSField" + "." + "task" + "=" + "'" + recSch.task + "'" + ";"
 		lv_str += "\n USSField" + "." + "desc" + "=" + "'" + recSch.desc + "'" + ";"
 		lv_str += "\n USSField" + "." + "htmlType" + "=" + "'" + recSch.htmlType + "'" + ";"
-		if (func == "Y") {
+		if ((func == "Y")  && (parseInt(recSch.editorRole) & parseInt(role))) {
 			lv_str += "\n USSField" + "." + "entitle" + "=" + "'" + recSch.entitle + "'" + ";"
 		} else {
 			lv_str += "\n USSField" + "." + "entitle" + "=" + "'READONLY'" + ";"
 		}
 		lv_str += "\n USSField" + "." + "enttlname" + "=" + "'" + recSch.enttlname + "'" + ";"
+		lv_str += "\n USSField" + "." + "editorRole" + "=" + "'" + recSch.editorRole + "'" + ";"
 		lv_str += "\n USSField" + "." + "mndf" + "=" + "'" + recSch.mndf + "'" + ";"
 		lv_str += "\n USSField" + "." + "dataType" + "=" + "'" + recSch.dataType + "'" + ";"
 		lv_str += "\n USSField" + "." + "cclass" + "=" + "'" + recSch.cclass + "'" + ";"
@@ -265,7 +267,7 @@ define(function (require, exports, module) {
 
 		var recObjArr = [];
 		if (Array.isArray(rec)) {
-			recObjArr=rec;
+			recObjArr = rec;
 		} else {
 			recObjArr.push(rec);
 		}
@@ -276,10 +278,10 @@ define(function (require, exports, module) {
 				recSchObj.col = parent.col++;
 				recSchObj.maxCol = parent.maxCol;
 
-				var listValObjEvalStr =  listVal[recSchObj.name];
+				var listValObjEvalStr = listVal[recSchObj.name];
 				var labelObjEvalStr = recLabel[recSchObj.name];
 				var objEvalStr = recObj[recSchObj.name];
-				
+
 				if (this.hasChild(recSchObj)) {
 					lv_rtStr = this.frameGeneration(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode);
 					lv_str += this.sprint(lv_rtStr);
@@ -294,6 +296,67 @@ define(function (require, exports, module) {
 		lv_str += this.sprint("USSContainer" + level + ".appendChild(USSHeader" + level + " );");
 		lv_str += this.sprint("USSContainer" + level + ".appendChild(USSSession" + level + " );");
 		this.debug(level + "_" + parentCnt + " end ##### frameGeneration ###### ");
+		return lv_str;
+	}
+
+	FG.prototype.frameGenerationV1 = function (
+		listVal, recLabel, rec, recSch, parent, level, func, parentCnt, mode, role
+	) {
+		var lv_str = "";
+		var lv_rtStr = "";
+		this.debug(level + "_" + parentCnt + " start ##### frameGeneration V1 ###### ");
+		if ( parseInt(parent.enttlname) & parseInt(role)) {
+			if (parent.Xpath == "/") {
+				parent.Xpath = "$" + parent.name;
+			}
+			lv_str += this.sprint("USSContainer" + level + "   =   us.USSCreateContainer();");
+			lv_str += this.sprint('USSTable' + level + '     =   new us.USSCreateTable_();');
+			lv_str += this.sprint('USSTableRow' + level + '    =   new us.USSCreateTableRow_();');
+			if (parent.task == "NONE") {
+				lv_str += this.sprint('USSHeader' + level + '     =   us.USSCreateHeader("' + parent.label + '");');
+			} else {
+				lv_str += this.sprint('USSHeader' + level + '     =   us.USSCreateHeader("' + parent.label + '","' + parent.task + '" ,"' + parent.name + '" ,"' + mode + '"   );');
+			}
+			lv_str += this.sprint('USSSession' + level + '     =   us.USSCreateSession();');
+									//recSch, varStrVal, varLabelStrVal, varStrListVal, func, level, mode, role
+			lv_rtStr = this.frameField(parent, '',       '',             '',            func, level, "NONE", parent.enttlname);
+			lv_str += this.sprint(lv_rtStr);
+			lv_str += this.sprint('USSSession' + level + '.appendChild(USSTableRow' + level + ');');
+
+			var recObjArr = [];
+			if (Array.isArray(rec)) {
+				recObjArr = rec;
+			} else {
+				recObjArr.push(rec);
+			}
+			recObjArr.forEach(function (recObj) {
+				recSch.forEach(function (recSchObj, recSchCnt) {
+					recSchObj.parent = parent.name;
+					recSchObj.parentHtmlType = parent.htmlType;
+					recSchObj.col = parent.col++;
+					recSchObj.maxCol = parent.maxCol;
+
+					var listValObjEvalStr = listVal[recSchObj.name];
+					var labelObjEvalStr = recLabel[recSchObj.name];
+					var objEvalStr = recObj[recSchObj.name];
+					if (parseInt(recSchObj.enttlname) & parseInt(role)) {
+						if (this.hasChild(recSchObj)) {
+							lv_rtStr = this.frameGenerationV1(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode, role);
+							lv_str += this.sprint(lv_rtStr);
+							lv_str += this.sprint("USSSession" + level + ".appendChild(USSContainer" + (level + 1) + ");");
+						} else {
+														//recSch, varStrVal, varLabelStrVal, varStrListVal, func, level, mode, role
+							lv_rtStr = this.frameField(recSchObj, objEvalStr, labelObjEvalStr, listValObjEvalStr, func, level, mode, role);
+							lv_str += this.sprint(lv_rtStr);
+							lv_str += this.sprint('USSSession' + level + '.appendChild(USSTableRow' + level + ');');
+						}
+					}
+				}, this);
+			}, this);
+			lv_str += this.sprint("USSContainer" + level + ".appendChild(USSHeader" + level + " );");
+			lv_str += this.sprint("USSContainer" + level + ".appendChild(USSSession" + level + " );");
+		}
+		this.debug(level + "_" + parentCnt + " end ##### frameGeneration V1 ###### ");
 		return lv_str;
 	}
 

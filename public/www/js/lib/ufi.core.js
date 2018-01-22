@@ -1,10 +1,6 @@
 define(function (require, exports, module) {
   "use strict";
 
-  console.log("require");
-  console.log(require);
-  console.log(exports);
-  console.log(module);
   var glUserId = "";
   var glGroupId = "";
   var USS = function () {
@@ -127,7 +123,8 @@ define(function (require, exports, module) {
       this.desc = '',
       this.htmlType = 'text', /* newly introduced in USS05*/
       this.entitle = 'READONLY'; // Editable /Readonly
-    this.enttlname = 0xFF, //Entitle name to db
+      this.enttlname = 0xFF, //Entitle name to db
+      this.editorRole = 0xFF, // Editable Role
       this.mndf = 'N',
       this.dataType = 'VARCHAR', // NUMBER/VARCHAR/DATE/EMAIL/AMOUNT/LIST/DIV/
       this.cclass = 'ctable', //
@@ -1114,6 +1111,8 @@ define(function (require, exports, module) {
             var TaskId = document.getElementById(baseid + "Task" + "Id");
             var MndfId = document.getElementById(baseid + "Mndf" + "Id");
             var EntitleId = document.getElementById(baseid + "Entitle" + "Id");
+            var EnttlnameId = document.getElementById(baseid + "Enttlname" + "Id");
+            var EditorRoleId = document.getElementById(baseid + "EditorRole" + "Id");
             var DfltId = document.getElementById(baseid + "Dflt" + "Id");
             var MaxId = document.getElementById(baseid + "Max" + "Id");
             var MinId = document.getElementById(baseid + "Min" + "Id");
@@ -1134,6 +1133,8 @@ define(function (require, exports, module) {
             fieldObj.min = MinId.value;
             fieldObj.tips = TipsId.value;
             fieldObj.entitle = EntitleId.value;
+            fieldObj.enttlname = EnttlnameId.value;
+            fieldObj.editorRole = EditorRoleId.value;
             fieldObj.xml = XmlId.value;
             fieldObj.maxCol = MaxColId.value;
             fieldObj.dimensions = DimensionsId.value;
@@ -1179,6 +1180,7 @@ define(function (require, exports, module) {
     var MaxColId = document.getElementById(baseid + "MaxCol" + "Id");
     var TaskId = document.getElementById(baseid + "Task" + "Id");
     var EntitleId = document.getElementById(baseid + "Entitle" + "Id");
+    var EditorRoleId = document.getElementById(baseid + "EditorRole" + "Id");
     var DimensionsId = document.getElementById(baseid + "Dimensions" + "Id");
     var DataCategoryId = document.getElementById(baseid + "DataCategory" + "Id");
     PreviewId.innerHTML = "<div> </div>";
@@ -1194,6 +1196,7 @@ define(function (require, exports, module) {
     fieldObj.min = MinId.value;
     fieldObj.tips = TipsId.value;
     fieldObj.entitle = EntitleId.value;
+    fieldObj.editorRole = EditorRoleId.value;
     fieldObj.maxCol = MaxColId.value;
     fieldObj.task = TaskId.value;
     fieldObj.entitle = EntitleId.value;
@@ -1214,6 +1217,8 @@ define(function (require, exports, module) {
     var TaskId = document.getElementById(baseid + "Task" + "Id");
     var MndfId = document.getElementById(baseid + "Mndf" + "Id");
     var EntitleId = document.getElementById(baseid + "Entitle" + "Id");
+    var EnttlnameId = document.getElementById(baseid + "Enttlname" + "Id");
+    var EditorRoleId = document.getElementById(baseid + "EditorRole" + "Id");
     var DfltId = document.getElementById(baseid + "Dflt" + "Id");
     var MaxId = document.getElementById(baseid + "Max" + "Id");
     var MinId = document.getElementById(baseid + "Min" + "Id");
@@ -1236,6 +1241,8 @@ define(function (require, exports, module) {
     fieldObj.min = MinId.value;
     fieldObj.tips = TipsId.value;
     fieldObj.entitle = EntitleId.value;
+    fieldObj.enttlname = EnttlnameId.value;
+    fieldObj.editorRole = EditorRoleId.value;
     fieldObj.xml = XmlId.value;
     fieldObj.maxCol = MaxColId.value;
     fieldObj.dimensions = DimensionsId.value;
@@ -1541,6 +1548,29 @@ define(function (require, exports, module) {
       }
       divCurrDivEntitle.appendChild(divCurrDivEntitleOption);
     }
+    // Enttlname
+    var divCurrDivEnttlname = document.createElement("input");
+    divCurrDivEnttlname.setAttribute("parentid", parentid);
+    divCurrDivEnttlname.setAttribute("baseid", childDiv.id);
+    divCurrDivEnttlname.setAttribute("id", childDiv.id + "Enttlname" + "Id");
+    divCurrDivEnttlname.setAttribute("mndf", "Y");
+    divCurrDivEnttlname.setAttribute("childCount", "0");
+    divCurrDivEnttlname.setAttribute("type", "container");
+    divCurrDivEnttlname.setAttribute("placeholder", "Enttlname");
+    divCurrDivEnttlname.setAttribute("value", fieldObj.enttlname);
+    divCurrDivEnttlname.setAttribute("title", "Enttlname");
+
+    // editorRole
+    var divCurrDivEditorRole = document.createElement("input");
+    divCurrDivEditorRole.setAttribute("parentid", parentid);
+    divCurrDivEditorRole.setAttribute("baseid", childDiv.id);
+    divCurrDivEditorRole.setAttribute("id", childDiv.id + "EditorRole" + "Id");
+    divCurrDivEditorRole.setAttribute("mndf", "Y");
+    divCurrDivEditorRole.setAttribute("childCount", "0");
+    divCurrDivEditorRole.setAttribute("type", "container");
+    divCurrDivEditorRole.setAttribute("placeholder", "EditorRole");
+    divCurrDivEditorRole.setAttribute("value", fieldObj.editorRole);
+    divCurrDivEditorRole.setAttribute("title", "EditorRole");
 
     var divCurrDivXml = document.createElement("select");
     divCurrDivXml.setAttribute("parentid", parentid);
@@ -1725,6 +1755,8 @@ define(function (require, exports, module) {
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivXml));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivMaxCol));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivEntitle));
+    properityWindowLabel.appendChild(this.genRowElement(divCurrDivEnttlname));
+    properityWindowLabel.appendChild(this.genRowElement(divCurrDivEditorRole));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivTips));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivMndf));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivMin));
