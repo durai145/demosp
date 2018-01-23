@@ -153,29 +153,8 @@ function getCardDetail( pool, inUsrId, inGrpId,callback)
 
 
 
- 	poolGl.getConnection(function(err, connection) {
+}
 
-var query='select CARD4  Card_Number ,  MIN_DUE_AMT Minimum_Due  , TTL_BAL Total_Balance,  DATE_FORMAT(DUE_DATE, \'%d-%m-%Y\')  Due_Date    from CARD001MB c WHERE  c.usr_id  = ' + connection.escape(inUsrId) +'';
-
-log.info(query);
-
-var queryRslt=connection.query(query,function(err, rows, fields) {
-
-	if(err)  callback(false,{"message" : err},rows);
-	rows= rows|| [];
-	if ( rows.length ==0 )
-	{
-		callback(false,{"message" : "Access Denied"},rows);
-	}
-	else
-	{
-		callback(true,fields,rows);
-	}
-});
-connection.release();
-
-});
- }
 
 
 

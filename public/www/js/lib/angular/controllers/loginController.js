@@ -1,100 +1,92 @@
 define([],
-function()
-{
+  function () {
 
-  return [ '$scope' , 'toaster','loginService','$state' ,'$dashboardState' ,'$window',function($scope,toaster,loginService,$state,$dashboardState,$window){
+    return ['$scope', 'toaster', 'loginService', '$state', '$dashboardState', '$window', function ($scope, toaster, loginService, $state, $dashboardState, $window) {
 
-    $scope.login=function()
-    {
-      alert("login control");
-    }
+      $scope.login = function () {
+        alert("login control");
+      }
 
-    $scope.uss_submit=function()
-      {
+      $scope.uss_submit = function () {
 
 
-           $window.sessionStorage.setItem("firstName"  ,"Money Bank Admin");
-            $window.sessionStorage.setItem("grpName"    ,"NA");
-            $window.sessionStorage.setItem("firstName"  ,"DURAIMURUGAN");
-            $window.sessionStorage.setItem("lastName"   ,"GOVINDARAJ");
-            $window.sessionStorage.setItem("prodVersion","1");
-            $window.sessionStorage.setItem("prtlName"   ,"Money Bank");
-            $window.sessionStorage.setItem("prodName"   , "Luna SP");
-            $window.sessionStorage.setItem("usrId"      ,"1");
-            $window.sessionStorage.setItem("grpId"      ,"1");
+        $window.sessionStorage.setItem("firstName", "Money Bank Admin");
+        $window.sessionStorage.setItem("grpName", "NA");
+        $window.sessionStorage.setItem("firstName", "DURAIMURUGAN");
+        $window.sessionStorage.setItem("lastName", "GOVINDARAJ");
+        $window.sessionStorage.setItem("prodVersion", "1");
+        $window.sessionStorage.setItem("prtlName", "GPASSO");
+        $window.sessionStorage.setItem("prodName", "Heaerie Chiper Mail");
+        $window.sessionStorage.setItem("usrId", "1");
+        $window.sessionStorage.setItem("grpId", "1");
 
 
 
-               var   entitlement=  [
-                {
-                  'link' :'dashboard'
-                ,'linkName' :'Home'
-                ,'uid' :'dashboard'
-                , 'dataType' :'CONTAINER'
-                , 'child' : [ 
-                    {
-                    'link' :'dashboard'
-                    ,'linkName' :'Dashboard'
-                    ,'uid'  :'dashboard2'
-                    , 'dataType' :'NODE'
-                    ,'child'  : []
-                    }
-                    ,
-                    {
-                    'link' :'sendMessage'
+        var entitlement = [{
+            'link': 'dashboard',
+            'linkName': 'Home',
+            'uid': 'dashboard',
+            'dataType': 'CONTAINER',
+            'child': [{
+                'link': 'dashboard',
+                'linkName': 'Dashboard',
+                'uid': 'dashboard2',
+                'dataType': 'NODE',
+                'child': []
+              },
+              {
+                'link': 'sendMessage'
 
-                    ,'linkName' :'Send Message'
-                    ,'uid'  :'sendMessage1'
-                    , 'dataType' :'NODE'
-                    ,'child'  : []
-                    }
-                    ,
-                    {
-                    'link' :'SchemaGenerator'
+                  ,
+                'linkName': 'Send Message',
+                'uid': 'sendMessage1',
+                'dataType': 'NODE',
+                'child': []
+              },
+              {
+                'link': 'SchemaGenerator'
 
-                    ,'linkName' :'SchemaGenerator'
-                    ,'uid'  :'SchemaGenerator'
-                    , 'dataType' :'NODE'
-                    ,'child'  : []
-                    }
-                     ,
-                    {
-                    'link' :'signatureVerify'
-                    ,'linkName' :'Signature Verify'
-                    ,'uid'  :'signatureVerify'
-                    , 'dataType' :'NODE'
-                    ,'child'  : []
-                    }
-					,
-                    {
-                    'link' :'inbox'
-                    ,'linkName' :'inbox'
-                    ,'uid'  :'inbox'
-                    , 'dataType' :'NODE'
-                    ,'child'  : []
-                    }
+                  ,
+                'linkName': 'SchemaGenerator',
+                'uid': 'SchemaGenerator',
+                'dataType': 'NODE',
+                'child': []
+              },
+              {
+                'link': 'signatureVerify',
+                'linkName': 'Signature Verify',
+                'uid': 'signatureVerify',
+                'dataType': 'NODE',
+                'child': []
+              },
+              {
+                'link': 'inbox',
+                'linkName': 'inbox',
+                'uid': 'inbox',
+                'dataType': 'NODE',
+                'child': []
+              }
 
-                  ]
-                }
-                         
-              ];
+            ]
+          }
 
-          $window.sessionStorage.setItem( "treeViewJson" ,JSON.stringify(entitlement));
-         console.log( $window.sessionStorage.getItem("treeViewJson"));
+        ];
 
-            $state.go('dashboard');
-        
+        $window.sessionStorage.setItem("treeViewJson", JSON.stringify(entitlement));
+        console.log($window.sessionStorage.getItem("treeViewJson"));
 
-       //A alert("I am in uss_submit");
+        $state.go('dashboard');
+
+
+        //A alert("I am in uss_submit");
       };
-      $scope.uss_auth=function()
-      {
+      $scope.uss_auth = function () {
 
         $state.go('signup');
 
-          /*            loginService.authorizeSSO({     "grantType"     : "password" */
-          /*loginService.authorizeSSO({     "grantType"     : "password" */
-           /*           ,'clientId'    :'CLIENTSP'
+        /*            loginService.authorizeSSO({     "grantType"     : "password" */
+        /*loginService.authorizeSSO({     "grantType"     : "password" */
+        /*           ,'clientId'    :'CLIENTSP'
                       ,'scope'       : 'GSA'
                       ,'username'    : 'durai145@live.in'
                       ,'password'    : '1qaz2wsx'
@@ -109,9 +101,9 @@ function()
 
         //alert("I am in uss_submit");
       };
-  }];
-  
-});
+    }];
+
+  });
 
 /*[
  toasterService.pop('success', "title", "text");
