@@ -191,11 +191,13 @@ define(function (require, exports, module) {
 		if (varStrVal === undefined)
 			varStrVal == "";
 		if ((recSch.col % recSch.maxCol) == 1) {
-			lv_str += "\n USSTableRow" + level + " = us.USSCreateTableRow_();	";
+			lv_str += "\n USSTableRow" + level + " = new us.USSCreateTableRow_();	";
 		}
+		/*
 		if (recSch.col == 1) {
 			lv_str += "\n USSTableRow" + level + " = new  us.USSCreateTableRow_();	";
 		}
+		*/
 		lv_str += "\n USSField    = new us.USSField_(); ";
 		lv_str += "\n USSField" + "." + "group" + "=" + "'" + recSch.group + "'" + ";"
 		lv_str += "\n USSField" + "." + "name" + "=" + "'" + recSch.name + "'" + ";"
