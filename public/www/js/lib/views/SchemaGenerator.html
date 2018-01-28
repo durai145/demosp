@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-6">
 		<!--form name="dynForm" xmlname="Dashboard" class="cform" width="100"!-->
-		<div name="middleid" id="middleid">
+
 			<center>
 				<table>
 					<tr>
@@ -84,32 +84,11 @@
 						</td>
 					</tr>
 				</table>
-
-
-
-				<!--input type="button" class="button"  parent="hometran" task="EXPAND" value="Expand" onclick="javascript:onClick(this)"-->
-				<!--input type="button" class="button" parent="hometran" task="BACK" value="Dashboard" onclick="javascript:onClick(this)"-->
-
 				<input type="button" id="GenListValJson" parent="hometran" task="GENSJSON" value="Process" onclick="ProcessSJson(this)">
 				<input type="button" id="GenListValJson" parent="hometran" task="GENSJSON" value="Generate Schema" onclick="GenSJson(this)">
 			</center>
 
 			<br>
-
-
-
-
-
-
-			<!--div class="btn-group" role="group" aria-label="...">
-  <button type="button" class="btn btn-default">Left</button>
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
-</div-->
-
-			<!--button parentid="container0" type="button" mndf="Y"  onclick="AddContainer(this)"childcount="0" value="onclick" type="container">Add Container</button-->
-
-
 			<div id="container0" class="bmargin"> </div>
 
 			<center>
@@ -124,18 +103,17 @@
 				<input type="button" id="genxml" parent="hometran" task="Gen Frame" value="Xml" ng-click="GenXmlB(this)">
 				<input type="button" id="genxmlJson" parent="hometran" task="Gen Frame" value="XmlJson" ng-click="GenXmlJsonB(this)">
 				<input type="button" id="GenListValJson" parent="hometran" task="GGenListValJson" value="Gen List Val" onclick="javascript:GenListValJson(this)"
-				    ng-click="GenListValJsonB(this)">
+				 ng-click="GenListValJsonB(this)">
 			</center>
 
 		</div>
-		<!--/form-->
-
-	</div>
-
 	<div class="col-sm-6">
 		<div id="properityWindow">
 			Properity window
 		</div>
 	</div>
-
+	</div>
+<!--/form-->
+<div class="row">
+	<div name="middleid" id="middleid">
 </div>

@@ -719,7 +719,7 @@ define(function (require, exports, module) {
 
   USS.prototype.isContainer = function (fieldObj) {
 
-    if (fieldObj.dataType == "CONTAINER") {
+    if (fieldObj.htmlType == "CONTAINER" || fieldObj.htmlType == "TABLE") {
       return true;
     } else {
       return false;
@@ -1139,7 +1139,7 @@ define(function (require, exports, module) {
             fieldObj.maxCol = MaxColId.value;
             fieldObj.dimensions = DimensionsId.value;
             fieldObj.dataCategory = DataCategoryId.value;
-            if (HtmlTypeId.value == "CONTAINER" || HtmlTypeId.value == "PAGE") {
+            if (HtmlTypeId.value == "CONTAINER" || HtmlTypeId.value == "TABLE" || HtmlTypeId.value == "PAGE") {
               fieldObj.childs = new Array();
               var childsJson = this.GenSJson(IdName.value)
               for (var c = 0; c < childsJson.length; c++) {
@@ -1437,7 +1437,7 @@ define(function (require, exports, module) {
     divCurrDivHtmlType.setAttribute("value", fieldObj.htmlType);
     divCurrDivHtmlType.setAttribute("title", "HtmlType");
     divCurrDivHtmlType.setAttribute("class", "bmandatory");
-    var inpStrArr = "||PAGE|PAGE|TAP|TAP|COLLECTION|COLLECTION|CONTAINER|CONTAINER|FILE|FILE|TEXT|TEXT|LIST|LIST|OPTION|OPTION|DIV|DIV|INPUT|INPUT|DATE|DATE|PASSWORD|PASSWORD".split('|');
+    var inpStrArr = "||PAGE|PAGE|TAP|TAP|COLLECTION|COLLECTION|CONTAINER|CONTAINER|FILE|FILE|TEXT|TEXT|LIST|LIST|OPTION|OPTION|DIV|DIV|INPUT|INPUT|DATE|DATE|PASSWORD|PASSWORD|TABLE|TABLE".split('|');
     var divCurrDivHtmlTypeOption = "";
     for (var i = 0; i < inpStrArr.length; i += 2) {
       divCurrDivHtmlTypeOption = document.createElement("option");
@@ -1740,7 +1740,7 @@ define(function (require, exports, module) {
     divCurrDivPreViewHeader.setAttribute("class", "TreeContainerSchema");
 
     var divCurrDivPreViewSession = this.CreateField(fieldObj, divCurrDivPreViewSession);
-    if (fieldObj.htmlType == "CONTAINER" || fieldObj.htmlType == "PAGE") {
+    if (fieldObj.htmlType == "CONTAINER" ||fieldObj.htmlType == "TABLE" || fieldObj.htmlType == "PAGE") {
       childDiv.setAttribute("class", "bTreeContainer");
     } else {
       childDiv.className = "bmargin";
