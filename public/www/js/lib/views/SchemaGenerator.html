@@ -53,6 +53,14 @@
 					</tr>
 					<tr>
 						<td>
+							<textarea id="ScriptId" placeholder="Script"></textarea>
+						</td>
+						<td>
+							<input type="button" id="ExecScriptId" parent="hometran" task="EXECSCRIPT" value="ExecScript" ng-click="ExecScript(this)">
+						</td>
+					</tr>
+					<tr>
+						<td>
 							Readonly:
 							<select id="readOnlyFlgId" placeholder="readOnlyFlgId">
 								<option value="Y">Y</option>

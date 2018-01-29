@@ -100,13 +100,14 @@ define([],
           //commonTailer+="\n document.getElementById('FrameId').appendChild(USSContainer0); });";
 
           //var vcommonFrameGen="require([\"jquery\",\"ufi.core\", \"ufi.frameGen\",\"ufi.xml\",\"ufi.validate\"], function($,uficore,ufiframegen,ufixml,ufivalidate) { $(function() { alert('test');})} );"
-
+          
           var script = document.createElement("script");
           //scr.appendChild(commonHeader + vcommonFrameGen + commonTailer);
           script.type = 'text/javascript';
 
           script.text = commonHeader + vcommonFrameGen + commonTailer;
           document.getElementById('middleid').appendChild(script);
+          document.getElementById('ScriptId').value= commonHeader + vcommonFrameGen + commonTailer;
         }
         catch (e) {
           alert("GenFrameB Exep:" + e);
@@ -169,8 +170,18 @@ define([],
 
       }
 
+       function ExecScript() {
+        alert("ExecScript");
+        var script = document.createElement("script");
+        //scr.appendChild(commonHeader + vcommonFrameGen + commonTailer);
+        script.type = 'text/javascript';
 
+        script.text = document.getElementById('ScriptId').value;
+        document.getElementById('middleid').appendChild(script);
 
+      }
+
+      $scope.ExecScript=ExecScript;
 
       ///schema Generator
 
