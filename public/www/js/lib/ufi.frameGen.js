@@ -190,7 +190,7 @@ define(function (require, exports, module) {
 		var lv_str = "";
 		if (varStrVal === undefined)
 			varStrVal == "";
-		if ((recSch.col % recSch.maxCol) == 1) {
+		if ((recSch.col % recSch.maxCol) == 0) {
 			lv_str += "\n USSTableRow" + level + " = new us.USSCreateTableRow_();	";
 		}
 		/*
@@ -339,7 +339,7 @@ define(function (require, exports, module) {
 					var objEvalStr = "";
 					var labelObjEvalStr = recLabel[recSchObj.name];
 					var listValObjEvalStr = listVal[recSchObj.name];
-					recSchObj.col = parent.col++;
+					recSchObj.col = recSchCnt;
 					recSchObj.maxCol = parent.maxCol;
 
 					var recHdr = Object.assign({}, recSchObj);
@@ -354,18 +354,20 @@ define(function (require, exports, module) {
 				recSch.forEach(function (recSchObj, recSchCnt) {
 					recSchObj.parent = parent.name;
 					recSchObj.parentHtmlType = parent.htmlType;
-					recSchObj.col = parent.col++;
-					recSchObj.maxCol = parent.maxCol;
+					recSchObj.col = recSchCnt;
+					
 
 					var listValObjEvalStr = listVal[recSchObj.name];
 					var labelObjEvalStr = recLabel[recSchObj.name];
 					var objEvalStr = recObj[recSchObj.name];
 					if (parseInt(recSchObj.enttlname) & parseInt(role)) {
 						if (this.hasChild(recSchObj)) {
+							
 							lv_rtStr = this.frameGenerationV1(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode, role);
 							lv_str += this.sprint(lv_rtStr);
 							lv_str += this.sprint("USSSession" + level + ".appendChild(USSContainer" + (level + 1) + ");");
 						} else {
+							recSchObj.maxCol = parent.maxCol;
 							//recSch, varStrVal, varLabelStrVal, varStrListVal, func, level, mode, role
 							lv_rtStr = this.frameField(recSchObj, objEvalStr, labelObjEvalStr, listValObjEvalStr, func, level, mode, role);
 							lv_str += this.sprint(lv_rtStr);

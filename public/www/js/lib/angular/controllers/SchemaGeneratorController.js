@@ -171,7 +171,7 @@ define([],
       }
 
        function ExecScript() {
-        alert("ExecScript");
+     //   alert("ExecScript");
         var script = document.createElement("script");
         //scr.appendChild(commonHeader + vcommonFrameGen + commonTailer);
         script.type = 'text/javascript';
@@ -186,13 +186,6 @@ define([],
       ///schema Generator
 
       $scope.basicDetEditSave = function () {
-
-
-        // console.log($scope);
-
-
-        //	alert('basicDetEditSave :name =' + $scope.name);
-
         SchemaGeneratorService.save({
           "grantType": "password"
           /*loginService.authorizeSSO({     "grantType"     : "password" */
@@ -264,6 +257,7 @@ define([],
           , "DF16": "ascii"
           , "DF17": "ascii"
           , "DF18": "ascii"
+          , "DF19": "ascii"
           , "E1": "ascii"
         };
 
@@ -309,6 +303,7 @@ define([],
           , "DF16": "camelCase"
           , "DF17": "dimensionMin"
           , "DF18": "dimensionMax"
+          , "DF19": "editorRole"
           , "E1": "childs"
         };
 
