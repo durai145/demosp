@@ -141,7 +141,7 @@ define(function (require, exports, module) {
       this.onkeypress = 'onKeyPress(this);',
       this.onclick = 'onClick(this);',
       this.onblure = 'onBlure(this);',
-      this.listVal = '||A|A-ADD|M|M-MODIFY|I|I-INQURY|C|C-CANCEL|V|V-VERIFY',
+      this.listVal = '||A|A-ADD',
       this.help = 'N',
       this.helpLink = 'helpload',
       this.xml = 'Y',
@@ -153,6 +153,7 @@ define(function (require, exports, module) {
       this.dimensionMax = "", /*[]*/
       this.dimensionMin = "", /*[]*/
       this.dataCategory = '',
+      this.iconListVal = "|true|fa fa-check-circle|false|fa fa-times-circle"
       this.camelCase = true
 
   }
@@ -511,10 +512,6 @@ define(function (require, exports, module) {
   }
 
 
-
-
-  //alert("import USS end");
-
   USS.prototype.USSCreateTable_ = function () {
 
     this.ussTable = document.createElement("div");
@@ -844,6 +841,15 @@ define(function (require, exports, module) {
           this.tableBodyElmnt.name = fieldObj.name;
           this.tableBodyElmnt.className = 'ctable';
           this.tableBodyElmnt.appendChild(document.createTextNode(fieldObj.dflt));
+        } else if (fieldObj.htmlType == 'ICON') {
+          this.tableBodyElmnt = document.createElement("i");
+          this.tableBodyElmnt.name = fieldObj.name;
+          var iconListJson = this.listValToJson(fieldObj.iconListVal);
+          if (iconListJson[fieldObj.dflt] != undefined) {
+            this.tableBodyElmnt.className = iconListJson[fieldObj.dflt];
+          } else {
+            this.tableBodyElmnt.className = "fa fa-exclamation";
+          }
         } else if (fieldObj.htmlType == 'LOB') {
           this.tableBodyElmnt = document.createElement("textarea");
           this.tableBodyElmnt.name = fieldObj.name;
@@ -938,7 +944,7 @@ define(function (require, exports, module) {
     this.tableErrorBox = document.createElement("div");
     this.tableErrorBox.id = fieldObj.name + "ErrorBox";
 
-    if (fieldObj.htmlType != 'DIV') {
+    if ((fieldObj.htmlType != 'DIV') && (fieldObj.htmlType != 'ICON')) {
       this.tableBodyElmnt.className = 'ctext';
     }
     this.tableBodyElmnt.setAttribute("xml", fieldObj.xml);
@@ -999,7 +1005,7 @@ define(function (require, exports, module) {
       this.tableBodyElmnt.setAttribute("container", "N");
     }
 
-    if (fieldObj.entitle == 'READONLY') {
+    if ((fieldObj.entitle == 'READONLY') && (fieldObj.htmlType != 'ICON')) {
       this.tableBodyElmnt.className = 'clabel';
       this.tableBodyElmnt.setAttribute('readonly', 'true');
       if (fieldObj.htmlType == 'LIST') {
@@ -1058,6 +1064,7 @@ define(function (require, exports, module) {
         onkeypress: fieldObj.onkeypress,
         onclick: fieldObj.onclick,
         listVal: fieldObj.listVal,
+        iconListVal: fieldObj.iconListVal,
         help: fieldObj.help,
         helpLink: fieldObj.helpLink,
         xml: fieldObj.xml,
@@ -1072,7 +1079,7 @@ define(function (require, exports, module) {
 
     this.tableBodyElmntScript.text = jsfunc;
     USSTableRow.appendChild(this.clearfix);
-    if (fieldObj.parentHtmlType != 'TABLE') {
+    if (!["TABLE", "FIELD"].some(function (obj) { return fieldObj.parentHtmlType == obj }, fieldObj)) {
       USSTableRow.appendChild(this.tableBodyTd1);
     }
     if (fieldObj.parentHtmlType != 'HEADER') {
@@ -1108,6 +1115,7 @@ define(function (require, exports, module) {
             var NameId = document.getElementById(baseid + "Name" + "Id");
             var LabelId = document.getElementById(baseid + "Label" + "Id");
             var ListValId = document.getElementById(baseid + "ListVal" + "Id");
+            var IconListValId = document.getElementById(baseid + "IconListVal" + "Id");
             var TaskId = document.getElementById(baseid + "Task" + "Id");
             var MndfId = document.getElementById(baseid + "Mndf" + "Id");
             var EntitleId = document.getElementById(baseid + "Entitle" + "Id");
@@ -1126,6 +1134,7 @@ define(function (require, exports, module) {
             fieldObj.htmlType = HtmlTypeId.value;
             fieldObj.dataType = DataTypeId.value;
             fieldObj.listVal = ListValId.value;
+            fieldObj.iconListVal = IconListValId.value;
             fieldObj.task = TaskId.value;
             fieldObj.mndf = MndfId.value;
             fieldObj.dflt = DfltId.value;
@@ -1170,6 +1179,7 @@ define(function (require, exports, module) {
     var LabelId = document.getElementById(baseid + "Label" + "Id");
     var EntitleId = document.getElementById(baseid + "Entitle" + "Id");
     var ListValId = document.getElementById(baseid + "ListVal" + "Id");
+    var IconListValId = document.getElementById(baseid + "IconListVal" + "Id");
     var MndfId = document.getElementById(baseid + "Mndf" + "Id");
     var DataTypeId = document.getElementById(baseid + "DataType" + "Id");
     var HtmlTypeId = document.getElementById(baseid + "HtmlType" + "Id");
@@ -1188,6 +1198,7 @@ define(function (require, exports, module) {
 
     fieldObj.label = LabelId.value;
     fieldObj.listVal = ListValId.value;
+    fieldObj.iconListVal = IconListValId.value;
     fieldObj.dataType = DataTypeId.value;
     fieldObj.htmlType = HtmlTypeId.value;
     fieldObj.dflt = DfltId.value;
@@ -1214,6 +1225,7 @@ define(function (require, exports, module) {
     var NameId = document.getElementById(baseid + "Name" + "Id");
     var LabelId = document.getElementById(baseid + "Label" + "Id");
     var ListValId = document.getElementById(baseid + "ListVal" + "Id");
+    var IconListValId = document.getElementById(baseid + "IconListVal" + "Id");
     var TaskId = document.getElementById(baseid + "Task" + "Id");
     var MndfId = document.getElementById(baseid + "Mndf" + "Id");
     var EntitleId = document.getElementById(baseid + "Entitle" + "Id");
@@ -1234,6 +1246,7 @@ define(function (require, exports, module) {
     fieldObj.htmlType = HtmlTypeId.value;
     fieldObj.dataType = DataTypeId.value;
     fieldObj.listVal = ListValId.value;
+    fieldObj.iconListVal = IconListValId.value;
     fieldObj.task = TaskId.value;
     fieldObj.mndf = MndfId.value;
     fieldObj.dflt = DfltId.value;
@@ -1437,7 +1450,7 @@ define(function (require, exports, module) {
     divCurrDivHtmlType.setAttribute("value", fieldObj.htmlType);
     divCurrDivHtmlType.setAttribute("title", "HtmlType");
     divCurrDivHtmlType.setAttribute("class", "bmandatory");
-    var inpStrArr = "||PAGE|PAGE|TAP|TAP|COLLECTION|COLLECTION|CONTAINER|CONTAINER|FILE|FILE|TEXT|TEXT|LIST|LIST|OPTION|OPTION|DIV|DIV|INPUT|INPUT|DATE|DATE|PASSWORD|PASSWORD|TABLE|TABLE".split('|');
+    var inpStrArr = "||PAGE|PAGE|TAP|TAP|COLLECTION|COLLECTION|CONTAINER|CONTAINER|FILE|FILE|TEXT|TEXT|LIST|LIST|OPTION|OPTION|DIV|DIV|INPUT|INPUT|DATE|DATE|PASSWORD|PASSWORD|TABLE|TABLE|FIELD|FIELD|ICON|ICON".split('|');
     var divCurrDivHtmlTypeOption = "";
     for (var i = 0; i < inpStrArr.length; i += 2) {
       divCurrDivHtmlTypeOption = document.createElement("option");
@@ -1510,6 +1523,17 @@ define(function (require, exports, module) {
     divCurrDivListVal.setAttribute("placeholder", "List Val");
     divCurrDivListVal.setAttribute("value", fieldObj.listVal);
     divCurrDivListVal.setAttribute("title", "ListVal");
+
+    var divCurrDivIconListVal = document.createElement("input");
+    divCurrDivIconListVal.setAttribute("parentid", parentid);
+    divCurrDivIconListVal.setAttribute("baseid", childDiv.id);
+    divCurrDivIconListVal.setAttribute("id", childDiv.id + "IconListVal" + "Id");
+    divCurrDivIconListVal.setAttribute("mndf", "Y");
+    divCurrDivIconListVal.setAttribute("childCount", "0");
+    divCurrDivIconListVal.setAttribute("type", "container");
+    divCurrDivIconListVal.setAttribute("placeholder", "Icon List Val");
+    divCurrDivIconListVal.setAttribute("value", fieldObj.iconListVal);
+    divCurrDivIconListVal.setAttribute("title", "Icon ListVal");
 
     //task
     var divCurrDivTask = document.createElement("input");
@@ -1630,7 +1654,7 @@ define(function (require, exports, module) {
     divCurrDivDataType.setAttribute("value", fieldObj.dataType);
     divCurrDivDataType.setAttribute("title", "dataType");
 
-    inpStrArr = "||PAGE|PAGE|TAP|TAP|CONTAINER|CONTAINER|COLLECTION|COLLECTION|TEXT|TEXT|LIST|LIST|OPTION|OPTION|DIV|DIV|INPUT|INPUT|DATE|DATE|VARCHAR|VARCHAR|AMOUNT|AMOUNT|NUMBER|NUMBER|JSON|JSON".split('|');
+    inpStrArr = "||PAGE|PAGE|TAP|TAP|CONTAINER|CONTAINER|COLLECTION|COLLECTION|TEXT|TEXT|LIST|LIST|OPTION|OPTION|DIV|DIV|INPUT|INPUT|DATE|DATE|VARCHAR|VARCHAR|AMOUNT|AMOUNT|NUMBER|NUMBER|JSON|JSON|BOOLEAN|BOOLEAN|ARRAY|ARRAY".split('|');
     var divCurrDivDataTypeOption = "";
     for (var i = 0; i < inpStrArr.length; i += 2) {
       divCurrDivDataTypeOption = document.createElement("option");
@@ -1767,6 +1791,7 @@ define(function (require, exports, module) {
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivDimensions));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivDataCategory));
     properityWindowLabel.appendChild(this.genRowElement(divCurrDivListVal));
+    properityWindowLabel.appendChild(this.genRowElement(divCurrDivIconListVal));
     if (fieldObj.htmlType != "PAGE") {
       childHideDiv.appendChild(divButton);
     }
@@ -1850,6 +1875,42 @@ define(function (require, exports, module) {
     childDiv.id = "Container" + ContinerCount++;
     return childDiv;
   }
+
+  USS.prototype.listValToJson = function (listVal) {
+		var retJson = {};
+		var key = "";
+		listVal.split("|").forEach(function (listValObj, i) {
+			if (i % 2 == 0) {
+				key = listValObj;
+			} else {
+				if (key == "") {
+					retJson["NONE"] = "NONE";
+				} else {
+					retJson[key] = listValObj;
+				}
+			}
+		}, this);
+		return retJson;
+	}
+
+	USS.prototype.jsonToListVal = function (list, obj) {
+		var listArr = list.split('|');
+		var returnStr = "";
+		try {
+
+			for (var i = 0; i < listArr.length; i += 2) {
+				if (i == 0) {
+					returnStr += listArr[i] + "|" + obj[listArr[i]];
+				} else {
+					returnStr += "|" + listArr[i] + "|" + obj[listArr[i]];
+				}
+			}
+		} catch (e) {
+			console.log("jsonToListVal:Exception" + e);
+		}
+		return returnStr
+  }
+  
   exports.USS = USS;
   /*
   exports.USS.USSSetScript_				=ussObj.USSSetScript_				;

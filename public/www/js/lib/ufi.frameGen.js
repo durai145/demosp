@@ -150,40 +150,7 @@ define(function (require, exports, module) {
 		return retObj;
 	}
 
-	FG.prototype.listValToJson = function (listVal) {
-		var retJson = {};
-		var key = "";
-		listVal.split("|").forEach(function (listValObj, i) {
-			if (i % 2 == 0) {
-				key = listValObj;
-			} else {
-				if (key == "") {
-					retJson["NONE"] = "NONE";
-				} else {
-					retJson[key] = listValObj;
-				}
-			}
-		}, this);
-		return retJson;
-	}
 
-	FG.prototype.jsonToListVal = function (list, obj) {
-		var listArr = list.split('|');
-		var returnStr = "";
-		try {
-
-			for (var i = 0; i < listArr.length; i += 2) {
-				if (i == 0) {
-					returnStr += listArr[i] + "|" + obj[listArr[i]];
-				} else {
-					returnStr += "|" + listArr[i] + "|" + obj[listArr[i]];
-				}
-			}
-		} catch (e) {
-			console.log("jsonToListVal:Exception" + e);
-		}
-		return returnStr
-	}
 
 	FG.prototype.frameField = function (recSch, varStrVal, varLabelStrVal, varStrListVal, func, level, mode, role) {
 		this.debug('frameField start');
@@ -254,6 +221,7 @@ define(function (require, exports, module) {
 		if (parent.Xpath == "/") {
 			parent.Xpath = "$" + parent.name;
 		}
+
 		lv_str += this.sprint("USSContainer" + level + "   =   us.USSCreateContainer();");
 		lv_str += this.sprint('USSTable' + level + '     =   new us.USSCreateTable_();');
 		lv_str += this.sprint('USSTableRow' + level + '    =   new us.USSCreateTableRow_();');
@@ -295,7 +263,10 @@ define(function (require, exports, module) {
 				}
 			}, this);
 		}, this);
-		lv_str += this.sprint("USSContainer" + level + ".appendChild(USSHeader" + level + " );");
+
+		if (parent.htmlType != 'FIELD') {
+			lv_str += this.sprint("USSContainer" + level + ".appendChild(USSHeader" + level + " );");
+		}
 		lv_str += this.sprint("USSContainer" + level + ".appendChild(USSSession" + level + " );");
 		this.debug(level + "_" + parentCnt + " end ##### frameGeneration ###### ");
 		return lv_str;
@@ -355,14 +326,14 @@ define(function (require, exports, module) {
 					recSchObj.parent = parent.name;
 					recSchObj.parentHtmlType = parent.htmlType;
 					recSchObj.col = recSchCnt;
-					
+
 
 					var listValObjEvalStr = listVal[recSchObj.name];
 					var labelObjEvalStr = recLabel[recSchObj.name];
 					var objEvalStr = recObj[recSchObj.name];
 					if (parseInt(recSchObj.enttlname) & parseInt(role)) {
 						if (this.hasChild(recSchObj)) {
-							
+
 							lv_rtStr = this.frameGenerationV1(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode, role);
 							lv_str += this.sprint(lv_rtStr);
 							lv_str += this.sprint("USSSession" + level + ".appendChild(USSContainer" + (level + 1) + ");");
