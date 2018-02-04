@@ -1,7 +1,7 @@
 define([],
   function () {
 
-    return ['$scope', 'toaster', 'SchemaGeneratorService', '$state', function ($scope, toaster, SchemaGeneratorService, $state) {
+    return ['$scope', 'toaster', 'SchemaGeneratorService', '$state' , '$window', function ($scope, toaster, SchemaGeneratorService, $state, $window) {
 
       var ufiuss = require('ufi.core');
       var ufiframegen = require('ufi.frameGen');
@@ -10,6 +10,7 @@ define([],
 
       var $newdiv1 = $("<div id='object1'/> Dynamic body</div>")
       var newdiv2 = document.createElement("div");
+      
 
       newdiv2.id = "middleid";
       //alert("main1");
@@ -104,9 +105,10 @@ define([],
           var script = document.createElement("script");
           //scr.appendChild(commonHeader + vcommonFrameGen + commonTailer);
           script.type = 'text/javascript';
-
+          
           script.text = commonHeader + vcommonFrameGen + commonTailer;
           document.getElementById('middleid').appendChild(script);
+          $window.sessionStorage.setItem("ussScript",commonHeader + vcommonFrameGen + commonTailer);
           document.getElementById('ScriptId').value= commonHeader + vcommonFrameGen + commonTailer;
         }
         catch (e) {

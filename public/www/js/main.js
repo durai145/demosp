@@ -34,6 +34,7 @@ require.config({
         , 'require'           :'./lib/require'
         , 'backbone'           :'./lib/backbone'
         , 'underscore'           :'./lib/underscore'
+       // , 'vs' : './lib/external/monaco-editor-samples/node_modules/monaco-editor/dev/vs'
     /* , 'toaster'       : './lib/external/angular/toaster'*/
         /*, 'toasterService': './lib/angular/services/toasterService'*/
  	   },

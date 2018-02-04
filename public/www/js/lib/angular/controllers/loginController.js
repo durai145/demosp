@@ -60,6 +60,13 @@ define([],
                 'child': []
               },
               {
+                'link': 'UssScript',
+                'linkName': 'UssScript',
+                'uid': 'UssScript',
+                'dataType': 'NODE',
+                'child': []
+              },
+              {
                 'link': 'inbox',
                 'linkName': 'inbox',
                 'uid': 'inbox',

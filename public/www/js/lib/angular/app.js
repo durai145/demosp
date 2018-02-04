@@ -282,6 +282,30 @@ define([
 
       }
     });
+
+    $stateProvider.state('UssScript', {
+      url: '/UssScript/',
+      views: {
+
+        'pageMainContext': {
+
+          //template : heaerieUssServiceProvider.GenHtmlTemplateFromSJson('N')
+          templateUrl: 'js/lib/views/naviView.html',
+          controller: 'naviController'
+
+        },
+
+        'pageSubContext@UssScript': {
+
+          templateUrl: 'js/lib/views/UssScript.html',
+          controller: 'UssScript'
+          //template : 'this is test'
+          // templateUrl : 'view/loginView.html'
+        }
+
+      }
+    });
+
     $stateProvider.state('KeyBoard', {
       url: '/KeyBoard/',
       views: {
@@ -578,18 +602,7 @@ define([
           },
           response: function (response) {
             var deferred = $q.defer();
-
-            // console.log('response');
-            //console.log(response);
-
-
-
             var respJSON = JSON.stringify(response);
-
-            // alert("success["+ respJSON + "]" );
-
-            //toaster.pop('success','200', 'Success response [' + response.headers('x-access-token') +"]");
-
             var accessToken = response.headers('x-access-token');
 
             // alert('accessToken:' + accessToken);

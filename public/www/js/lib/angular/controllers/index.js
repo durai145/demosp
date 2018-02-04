@@ -16,7 +16,8 @@ define([
     ,'./msgContentPrevController'
     ,'./signatureVerifyController'
     ,'./resultController'
-], function (loginController,basicDetController,dashboardController,SchemaGeneratorController,naviController,signupController,keyBoardController,sendMessageController,msgContentPrevController,signatureVerifyController,resultController) {
+    ,'./UssScript'
+], function (loginController,basicDetController,dashboardController,SchemaGeneratorController,naviController,signupController,keyBoardController,sendMessageController,msgContentPrevController,signatureVerifyController,resultController,UssScript) {
     'use strict';
 
     //console.log(angular);
@@ -33,6 +34,7 @@ define([
         controllers.controller("msgContentPrevController",msgContentPrevController);
         controllers.controller("signatureVerifyController",signatureVerifyController);
         controllers.controller("resultController",resultController);
+        controllers.controller("UssScript",UssScript);
   
 
     return controllers;
