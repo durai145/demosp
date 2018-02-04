@@ -4,7 +4,6 @@ function()
 
 	return [ '$scope' , 'toaster','SchemaGeneratorService','$state', '$window', function($scope,toaster,SchemaGeneratorService,$state, $window){   
    $scope.$watch('$viewContentLoaded', function(){
-     alert($window.sessionStorage.getItem("ussScript"));
     require(['vs/editor/editor.main'], function() {
       var editor = monaco.editor.create(document.getElementById('ScriptId'), {
         value: [
@@ -13,6 +12,7 @@ function()
         language: 'javascript'
         , theme : 'vs-dark'
       });
+      $scope.editor=editor;
  //     alert(editor);
   //    console.log(editor);
     });
@@ -22,12 +22,11 @@ function()
 
 
    function ExecScript() {
-       alert("ExecScript");
        var script = document.createElement("script");
        //scr.appendChild(commonHeader + vcommonFrameGen + commonTailer);
        script.type = 'text/javascript';
       var ScriptId=document.getElementById('ScriptId');
-       script.text = ScriptId.value;
+       script.text = $scope.editor.getValue();
        document.getElementById('middleid').appendChild(script);
 
      }
