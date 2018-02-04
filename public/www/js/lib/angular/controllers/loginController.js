@@ -35,27 +35,9 @@ define([],
                 'child': []
               },
               {
-                'link': 'sendMessage'
-
-                  ,
-                'linkName': 'Send Message',
-                'uid': 'sendMessage1',
-                'dataType': 'NODE',
-                'child': []
-              },
-              {
-                'link': 'SchemaGenerator'
-
-                  ,
+                'link': 'SchemaGenerator' ,
                 'linkName': 'SchemaGenerator',
                 'uid': 'SchemaGenerator',
-                'dataType': 'NODE',
-                'child': []
-              },
-              {
-                'link': 'signatureVerify',
-                'linkName': 'Signature Verify',
-                'uid': 'signatureVerify',
                 'dataType': 'NODE',
                 'child': []
               },

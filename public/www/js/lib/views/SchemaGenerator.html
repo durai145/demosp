@@ -1,129 +1,185 @@
 <div class="row">
 	<div class="col-sm-6">
 		<!--form name="dynForm" xmlname="Dashboard" class="cform" width="100"!-->
+		<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+			<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+			<a class="nav-link" id="v-pills-SchemaJsonOutputId-tab" data-toggle="pill" href="#v-pills-SchemaJsonOutputId" role="tab" aria-controls="v-pills-SchemaJsonOutputId" aria-selected="false">SchemaJsonOutputId</a>
+			<a class="nav-link" id="v-pills-SchemaJsonInputId-tab" data-toggle="pill" href="#v-pills-SchemaJsonInputId" role="tab" aria-controls="v-pills-SchemaJsonInputId" aria-selected="false">SchemaJsonInputId</a>
+			<a class="nav-link" id="v-pills-parentId-tab" data-toggle="pill" href="#v-pills-parentId" role="tab" aria-controls="v-pills-parentId" aria-selected="false">parentId</a>
+			<a class="nav-link" id="v-pills-OutJsonTextId-tab" data-toggle="pill" href="#v-pills-OutJsonTextId" role="tab" aria-controls="v-pills-OutJsonTextId" aria-selected="false">OutJsonTextId</a>
+			<a class="nav-link" id="v-pills-LangResoureId-tab" data-toggle="pill" href="#v-pills-LangResoureId" role="tab" aria-controls="v-pills-LangResoureId" aria-selected="false">LangResoureId</a>
+			<a class="nav-link" id="v-pills-XMLTextId-tab" data-toggle="pill" href="#v-pills-XMLTextId" role="tab" aria-controls="v-pills-XMLTextId" aria-selected="false">XMLTextId</a>
+			<a class="nav-link" id="v-pills-XMLJsonId-tab" data-toggle="pill" href="#v-pills-XMLJsonId" role="tab" aria-controls="v-pills-XMLJsonId" aria-selected="false">XMLJsonId</a>
+			<a class="nav-link" id="v-pills-ListValId-tab" data-toggle="pill" href="#v-pills-ListValId" role="tab" aria-controls="v-pills-ListValId" aria-selected="false">ListValId</a>
+			<a class="nav-link" id="v-pills-TvlId-tab" data-toggle="pill" href="#v-pills-TvlId" role="tab" aria-controls="v-pills-TvlId" aria-selected="false">TvlId</a>
+			<a class="nav-link" id="v-pills-ScriptId-tab" data-toggle="pill" href="#v-pills-ScriptId" role="tab" aria-controls="v-pills-ScriptId" aria-selected="false">ScriptId</a>
+			
+		  </div>
+		  <div class="tab-content" id="v-pills-tabContent">
+			<div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+				<textarea id="SchemaJsonDfltId" placeholder="SchemaJsonText" style="width:100%;height:600px;border:1px solid grey">
+					[ { group:'ussms',name:'basicDet',label:'Basic Details',task:'ES',desc:'N',htmlType:'PAGE',entitle:'N',enttlname: 255, editorRole
+					: 255, mndf:'N',dataType:'PAGE',cclass:'ctext',validate:'',dflt:'',min:'0',max:'60',tips:'',onkeyup:'onKeyUp(this)',onchange:'onChange(this)',onkeydown:'onKeyDown(this)',onkeypress:'onKeyPress(this)',onclick:'onClick(this)',listVal:'0',help:'N',helpLink:'',xml:'Y',Xpath:'N',maxCol:1,
+					dimensions: "", dataCategory: "primary", childs: []} ]
+				</textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-SchemaJsonOutputId" role="tabpanel" aria-labelledby="v-pills-SchemaJsonOutputId-tab">
+				<textarea id="SchemaJsonOutputId" placeholder="SchemaJsonOuput" style="width:100%;height:600px;border:1px solid grey">
+				</textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-SchemaJsonInputId" role="tabpanel" aria-labelledby="v-pills-SchemaJsonInputId-tab">
+				<textarea id="SchemaJsonInputId" placeholder="SchemaJsonInput" style="width:100%;height:600px;border:1px solid grey">
+				</textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-parentId" role="tabpanel" aria-labelledby="v-pills-parentId-tab">
+				<textarea id="parentId" placeholder="parent" style="width:100%;height:600px;border:1px solid grey"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-OutJsonTextId" role="tabpanel" aria-labelledby="v-pills-OutJsonTextId-tab">
+				<textarea id="OutJsonTextId" placeholder="OutJsonText" style="width:100%;height:600px;border:1px solid grey"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-LangResoureId" role="tabpanel" aria-labelledby="v-pills-LangResoureId-tab">
+				<textarea id="LangResoureId" placeholder="LangResoure"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-XMLTextId" role="tabpanel" aria-labelledby="v-pills-XMLTextId-tab">
+				<textarea id="XMLTextId" placeholder="XMLText" style="width:100%;height:600px;border:1px solid grey"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-XMLJsonId" role="tabpanel" aria-labelledby="v-pills-XMLJsonId-tab">
+				<textarea id="XMLJsonId" placeholder="XMLJson"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-ListValId" role="tabpanel" aria-labelledby="v-pills-ListValId-tab">
+				<textarea id="ListValId" placeholder="ListValId" style="width:100%;height:600px;border:1px solid grey"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-TvlId" role="tabpanel" aria-labelledby="v-pills-TvlId-tab">
+				<textarea id="TvlId" placeholder="TvlId" style="width:100%;height:600px;border:1px solid grey"></textarea>
+			</div>
+			<div class="tab-pane fade" id="v-pills-ScriptId" role="tabpanel" aria-labelledby="v-pills-ScriptId-tab">
+				<textarea id="ScriptId" placeholder="ScriptId" style="width:100%;height:600px;border:1px solid grey"></textarea>
+				<input type="button" id="ExecScriptId" parent="hometran" task="EXECSCRIPT" value="ExecScript" ng-click="ExecScript(this)">
+			</div>
+		  </div>
 
 		<center>
-				<table>
-					<tr>
-						<td>
-							<textarea id="SchemaJsonDfltId" placeholder="SchemaJsonText">
-								[ { group:'ussms',name:'basicDet',label:'Basic Details',task:'ES',desc:'N',htmlType:'PAGE',entitle:'N',enttlname: 255, editorRole : 255, mndf:'N',dataType:'PAGE',cclass:'ctext',validate:'',dflt:'',min:'0',max:'60',tips:'',onkeyup:'onKeyUp(this)',onchange:'onChange(this)',onkeydown:'onKeyDown(this)',onkeypress:'onKeyPress(this)',onclick:'onClick(this)',listVal:'0',help:'N',helpLink:'',xml:'Y',Xpath:'N',maxCol:1,
-								dimensions: "", dataCategory: "primary", childs: []} ]
-							</textarea>
-						</td>
-						<td>
-							<textarea id="SchemaJsonOutputId" placeholder="SchemaJsonOuput">
-							</textarea>
-						</td>
+			<table>
+				<!--tr>
+					<td>
+						<textarea id="SchemaJsonDfltId" placeholder="SchemaJsonText">
+							[ { group:'ussms',name:'basicDet',label:'Basic Details',task:'ES',desc:'N',htmlType:'PAGE',entitle:'N',enttlname: 255, editorRole
+							: 255, mndf:'N',dataType:'PAGE',cclass:'ctext',validate:'',dflt:'',min:'0',max:'60',tips:'',onkeyup:'onKeyUp(this)',onchange:'onChange(this)',onkeydown:'onKeyDown(this)',onkeypress:'onKeyPress(this)',onclick:'onClick(this)',listVal:'0',help:'N',helpLink:'',xml:'Y',Xpath:'N',maxCol:1,
+							dimensions: "", dataCategory: "primary", childs: []} ]
+						</textarea>
+					</td>
+					<td>
+						<textarea id="SchemaJsonOutputId" placeholder="SchemaJsonOuput">
+						</textarea>
+					</td>
 
-					</tr>
-					<tr>
-						<td>
-							<textarea id="SchemaJsonInputId" placeholder="SchemaJsonInput">
-							</textarea>
-						</td>
-						<td>
-							<textarea id="parentId" placeholder="parent"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea id="OutJsonTextId" placeholder="OutJsonText"></textarea>
-						</td>
-						<td>
-							<textarea id="LangResoureId" placeholder="LangResoure"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea id="XMLTextId" placeholder="XMLText"></textarea>
-						</td>
-						<td>
-							<textarea id="XMLJsonId" placeholder="XMLJson"></textarea>
+				</tr>
+				<tr>
+					<td>
+						<textarea id="SchemaJsonInputId" placeholder="SchemaJsonInput">
+						</textarea>
+					</td>
+					<td>
+						<textarea id="parentId" placeholder="parent"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<textarea id="OutJsonTextId" placeholder="OutJsonText"></textarea>
+					</td>
+					<td>
+						<textarea id="LangResoureId" placeholder="LangResoure"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<textarea id="XMLTextId" placeholder="XMLText"></textarea>
+					</td>
+					<td>
+						<textarea id="XMLJsonId" placeholder="XMLJson"></textarea>
 
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea id="ListValId" placeholder="ListVal"></textarea>
-						</td>
-						<td>
-							<textarea id="TvlId" placeholder="Tvl"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea id="ScriptId" placeholder="Script"></textarea>
-						</td>
-						<td>
-							<input type="button" id="ExecScriptId" parent="hometran" task="EXECSCRIPT" value="ExecScript" ng-click="ExecScript(this)">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Readonly:
-							<select id="readOnlyFlgId" placeholder="readOnlyFlgId">
-								<option value="Y">Y</option>
-								<option value="N">N</option>
-							</select>
-						</td>
-						<td>
-							Multi Lang:
-							<select id="MultiLangId" placeholder="MultiLang">
-								<option value="Y">Y</option>
-								<option value="N">N</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							RoleId:
-							<select id="RoleId" placeholder="RoleId">
-								<option value=255>ADMIN</option>
-								<option value=01>ROLE_01</option>
-								<option value=02>ROLE_02</option>
-								<option value=04>ROLE_04</option>
-								<option value=08>ROLE_08</option>
-								<option value=16>ROLE_16</option>
-								<option value=32>ROLE_32</option>
-								<option value=64>ROLE_64</option>
-								<option value=128>ROLE_128</option>
-							</select>
-						</td>
-					</tr>
-				</table>
-				<input type="button" id="GenListValJson" parent="hometran" task="GENSJSON" value="Process" onclick="ProcessSJson(this)">
-				<input type="button" id="GenListValJson" parent="hometran" task="GENSJSON" value="Generate Schema" onclick="GenSJson(this)">
-			</center>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<textarea id="ListValId" placeholder="ListVal"></textarea>
+					</td>
+					<td>
+						<textarea id="TvlId" placeholder="Tvl"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<textarea id="ScriptId" placeholder="Script"></textarea>
+					</td>
+					<td>
+						<input type="button" id="ExecScriptId" parent="hometran" task="EXECSCRIPT" value="ExecScript" ng-click="ExecScript(this)">
+					</td>
+				</tr-->
+				<tr>
+					<td>
+						Readonly:
+						<select id="readOnlyFlgId" placeholder="readOnlyFlgId">
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+						</select>
+					</td>
+					<td>
+						Multi Lang:
+						<select id="MultiLangId" placeholder="MultiLang">
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						RoleId:
+						<select id="RoleId" placeholder="RoleId">
+							<option value=255>ADMIN</option>
+							<option value=01>ROLE_01</option>
+							<option value=02>ROLE_02</option>
+							<option value=04>ROLE_04</option>
+							<option value=08>ROLE_08</option>
+							<option value=16>ROLE_16</option>
+							<option value=32>ROLE_32</option>
+							<option value=64>ROLE_64</option>
+							<option value=128>ROLE_128</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<input type="button" id="GenListValJson" parent="hometran" task="GENSJSON" value="Process" onclick="ProcessSJson(this)">
+			<input type="button" id="GenListValJson" parent="hometran" task="GENSJSON" value="Generate Schema" onclick="GenSJson(this)">
+		</center>
 
-			<br>
-			<div id="container0" class="bmargin"> </div>
+		<br>
+		<div id="container0" class="bmargin"> </div>
 
-			<center>
+		<center>
 
-				<input type="text" id="PageNameId" task="GENRESOURCE" value="PageName" title="No">
-				<input type="text" id="PageNameIdLabel" task="GENRESOURCE" value="Page Name">
+			<input type="text" id="PageNameId" task="GENRESOURCE" value="PageName" title="No">
+			<input type="text" id="PageNameIdLabel" task="GENRESOURCE" value="Page Name">
 
 
-				<input type="button" class "button" id="genResourceId" parent="hometran" task="GENRESOURCE" value="generate Resource" ng-click="genResourceB(this)">
-				<input type="button" id="validate" parent="hometran" task="Gen JSON" value="Generate Json" ng-click="GenJsonB(this)">
-				<input type="button" id="verify" parent="hometran" task="Gen Frame" value="Generate Frame" ng-click="GenFrameB(this)">
-				<input type="button" id="genxml" parent="hometran" task="Gen Frame" value="Xml" ng-click="GenXmlB(this)">
-				<input type="button" id="genxmlJson" parent="hometran" task="Gen Frame" value="XmlJson" ng-click="GenXmlJsonB(this)">
-				<input type="button" id="GenListValJson" parent="hometran" task="GGenListValJson" value="Gen List Val" onclick="javascript:GenListValJson(this)"
-				 ng-click="GenListValJsonB(this)">
-			</center>
+			<input type="button" class "button" id="genResourceId" parent="hometran" task="GENRESOURCE" value="generate Resource" ng-click="genResourceB(this)">
+			<input type="button" id="validate" parent="hometran" task="Gen JSON" value="Generate Json" ng-click="GenJsonB(this)">
+			<input type="button" id="verify" parent="hometran" task="Gen Frame" value="Generate Frame" ng-click="GenFrameB(this)">
+			<input type="button" id="genxml" parent="hometran" task="Gen Frame" value="Xml" ng-click="GenXmlB(this)">
+			<input type="button" id="genxmlJson" parent="hometran" task="Gen Frame" value="XmlJson" ng-click="GenXmlJsonB(this)">
+			<input type="button" id="GenListValJson" parent="hometran" task="GGenListValJson" value="Gen List Val" onclick="javascript:GenListValJson(this)"
+			    ng-click="GenListValJsonB(this)">
+		</center>
 
-		</div>
-		<div class="col-sm-6">
-			<div class="col-sm-6">
-				<div class="col-sm-6">
+	</div>
+	<div class="col-sm-6">
 		<div id="properityWindow">
 			Properity window
 		</div>
 	</div>
-	</div>
+</div>
 <!--/form-->
 <div class="row">
 	<div name="middleid" id="middleid">
+	</div>
 </div>
