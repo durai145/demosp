@@ -37,32 +37,11 @@ define([
 
 
     this.GenHtmlTemplateFromSJson = function (jsonSchema, value, mode) {
-      // alert("test" + value);
       var USS = require("ufi.core").USS;
       var ufiframegen = require("ufi.frameGen");
       var ufivalidate = require("ufi.validate");
       var $ = require("jquery");
-
-
       var us = new ufiframegen.FG();
-      //var val= new ufivalidate.VAL();
-      /*
-
-         $http({
-        method: 'GET',
-        url: '/someUrl'
-      }).then(function successCallback(response) {
-          
-            alert('success');
-        }, function errorCallback(response) {
-
-           alert('failure');
-           console.log(response);
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-      */
-
       var schemaJson = eval('[{"group":"USS","name":"basicDet","label":"Basic Details","task":"EA","desc":"","htmlType":"PAGE","entitle":"NONREADONLY", maxCol:2, col: 1,"enttlname":"","mndf":"N","dataType":"PAGE","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[{"group":"USS","name":"name","label":"Name ","task":"NONE","desc":"","htmlType":"TEXT","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"name1","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"bodyType","label":"Body Type","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"NONE","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|SLIM|Slim|AVERAGE|Average|ATHLETIC|Athletic|HEAVY|Heavy ","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"complexion","label":"complexion","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"N","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|VFAIR|Very Fair|FAIR|Fair |WHEATISH|Wheatish|BWHEATISH|Wheatish |BROWN|brown|DARK|Dark","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"age","label":"Age ","task":"NONE","desc":"","htmlType":"TEXT","entitle":"NONREADONLY","enttlname":"","mndf":"N","dataType":"NUMBER","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"dob","label":"Date of Birth","task":"NONE","desc":"","htmlType":"DATE","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"DATE","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"DD/MM/YYYY or DD/MON/YYYY","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"phyStaus","label":"Physical Status ","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"NONE","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|NORMAL|Normal|PHYSICALLYCHALLENGED|Physically challenged","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"height","label":"Height ","task":"NONE","desc":"","htmlType":"TEXT","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"weight ","label":"Weight ","task":"NONE","desc":"","htmlType":"TEXT","entitle":"NONREADONLY","enttlname":"","mndf":"N","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"motherTongue","label":"Mother Tongue ","task":"NONE","desc":"","htmlType":"DIV","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"DIV","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"0","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"maritalStaus","label":"Marital Status ","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|U|Unmarried|NM|Never married","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"eatingHabits","label":"Eating Habits ","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"N","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|NV|Non Vegetarian|V|Vegetarian","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"drinkingHabits","label":"Drinking Habits ","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"NONE","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|ND|Non-drinker|D|Drinker","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]},{"group":"USS","name":"smokingHabits","label":"Smoking Habits ","task":"NONE","desc":"","htmlType":"LIST","entitle":"NONREADONLY","enttlname":"","mndf":"Y","dataType":"VARCHAR","cclass":"ctable","parent":"","parentHtmlType":"","validate":"","dflt":"NONE","min":"0","max":"60","tips":"","onkeyup":"onKeyUp(this);","onchange":"onChange(this);","onkeydown":"onKeyDown(this);","onkeypress":"onKeyPress(this);","onclick":"onClick(this);","onblure":"onBlure(this);","listVal":"NONE|None|NS|Non-smoker|S|Smoker","help":"N","helpLink":"helpload","xml":"Y","xmlname":"","Xpath":"/","maxCol":"1","col":"0","childs":[]}]}]');
 
       /* 
@@ -95,7 +74,6 @@ define([
       console.log('-------------ussScript------------');
       console.log(ussScript);
 
-      // try
       {
         var dynFGCall = (new Function("return function(us) {" + ussScript + "};"))();
 
@@ -104,15 +82,9 @@ define([
         console.log('appendObj.innerHTML');
         console.log(appendObj.innerHTML);
 
-        //return "<div> thsis dashboard from heaerieUssServiceProvider </div>";
         return "<div class='pageLayout'> <div class='bcontainer'>" + appendObj.innerHTML + "</div></div>";
 
       }
-      /*  catch(e)
-    {
-      alert('Core App:' + e);
-    }
-*/
     };
 
     this.$get = ["apiToken", function heaerieUssServiceFactory(apiToken) {
@@ -137,13 +109,6 @@ define([
     console.log($stateProvider);
     console.log($urlRouterProvider);
     // console.log(ussService);
-
-
-
-
-
-
-    //alert(heaerieUssServiceProvider.GenHtmlTemplateFromSJson('Y'));
     $stateProvider.state('login', {
       url: '/www/',
       views: {
@@ -156,24 +121,18 @@ define([
         }
       }
     });
-    //public/external/monaco-editor-samples/node_modules/monaco-editor/dev/
+
     $stateProvider.state('dashboard', {
       url: '/dashboard/',
       views: {
         'pageMainContext': {
-
-          //template : heaerieUssServiceProvider.GenHtmlTemplateFromSJson('N')
           templateUrl: 'js/lib/views/naviView.html',
           controller: 'naviController'
         },
 
         'pageSubContext@dashboard': {
-
-          //template : heaerieUssServiceProvider.GenHtmlTemplateFromSJson('basicDet','N',"FULL") //EIDT and ADD
-          //template : 'this is test'
           templateUrl: 'js/lib/views/dashboardView.html'
-
-            ,
+          ,
           controller: 'dashboardController'
         }
 
@@ -200,7 +159,7 @@ define([
           //template : 'this is test'
           templateUrl: 'js/lib/views/SchemaGenerator.html'
 
-            ,
+          ,
           controller: 'SchemaGeneratorController'
         }
 
@@ -442,7 +401,7 @@ define([
 
           template: heaerieUssServiceProvider.GenHtmlTemplateFromSJson('msgContentPrev', 'Y', 'BACK')
 
-            ,
+          ,
           controller: 'msgContentPrevController'
         }
       },
@@ -464,8 +423,8 @@ define([
 
         'pageSubContext@signatureVerify': {
           template: heaerieUssServiceProvider.GenHtmlTemplateFromSJson('signatureVerify', 'Y', 'SUBMIT')
-            // template:'<div id="" class="bcontainer" tabindex="-1"><div id="" class="bheader" tabindex="-1"><a>Signature Verify </a></div><div id="" class="bsession" tabindex="-1"><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="signatureVerify"></label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="signatureVerifyErrorBox"></div><input type="hidden" name="signatureVerify" class="clabel" xml="Y" mndf="N" datatype="CONTAINER" htmltype="CONTAINER" id="signatureVerify" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="signatureVerifyErrorBox" label="" title="" xpath="$SingnatureVerify.signatureVerify" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="SingnatureVerify" xmlname="signatureVerify" container="Y" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="tirack">TIRACK</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="tirackErrorBox"></div><input type="TEXT" name="USS_tirack" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="tirack" ng-model="$SingnatureVerify.signatureVerify.tirack" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="tirackErrorBox" label="TIRACK" title="" xpath="$SingnatureVerify.signatureVerify.tirack" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="tirack" container="N" readonly="true"><span></span><script></script></div></div><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="sender">Sender</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="senderErrorBox"></div><input type="TEXT" name="USS_sender" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="sender" ng-model="$SingnatureVerify.signatureVerify.sender" maxlength="60" min="0" value="" maxcol="1" col="1" dflt="" errorbox="senderErrorBox" label="Sender" title="" xpath="$SingnatureVerify.signatureVerify.sender" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="sender" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="receiver">Receiver</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="receiverErrorBox"></div><input type="TEXT" name="USS_receiver" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="receiver" ng-model="$SingnatureVerify.signatureVerify.receiver" maxlength="60" min="0" value="" maxcol="1" col="2" dflt="" errorbox="receiverErrorBox" label="Receiver" title="" xpath="$SingnatureVerify.signatureVerify.receiver" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="receiver" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="amount">Amount</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="amountErrorBox"></div><input type="TEXT" name="USS_amount" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="amount" ng-model="$SingnatureVerify.signatureVerify.amount" maxlength="60" min="0" value="" maxcol="1" col="3" dflt="" errorbox="amountErrorBox" label="Amount" title="" xpath="$SingnatureVerify.signatureVerify.amount" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="amount" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="currency">Currency</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="currencyErrorBox"></div><input type="TEXT" name="USS_currency" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="currency" ng-model="$SingnatureVerify.signatureVerify.currency" maxlength="60" min="0" value="" maxcol="1" col="4" dflt="" errorbox="currencyErrorBox" label="Currency" title="" xpath="$SingnatureVerify.signatureVerify.currency" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="currency" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="intermediateBic">Intermediate Bic</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="intermediateBicErrorBox"></div><input type="TEXT" name="USS_intermediateBic" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="intermediateBic" ng-model="$SingnatureVerify.signatureVerify.intermediateBic" maxlength="60" min="0" value="" maxcol="1" col="5" dflt="" errorbox="intermediateBicErrorBox" label="Intermediate Bic" title="" xpath="$SingnatureVerify.signatureVerify.intermediateBic" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="intermediateBic" container="N" readonly="true"><span></span><script></script></div></div></div></div>'
-            ,
+          // template:'<div id="" class="bcontainer" tabindex="-1"><div id="" class="bheader" tabindex="-1"><a>Signature Verify </a></div><div id="" class="bsession" tabindex="-1"><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="signatureVerify"></label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="signatureVerifyErrorBox"></div><input type="hidden" name="signatureVerify" class="clabel" xml="Y" mndf="N" datatype="CONTAINER" htmltype="CONTAINER" id="signatureVerify" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="signatureVerifyErrorBox" label="" title="" xpath="$SingnatureVerify.signatureVerify" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="SingnatureVerify" xmlname="signatureVerify" container="Y" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="tirack">TIRACK</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="tirackErrorBox"></div><input type="TEXT" name="USS_tirack" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="tirack" ng-model="$SingnatureVerify.signatureVerify.tirack" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="tirackErrorBox" label="TIRACK" title="" xpath="$SingnatureVerify.signatureVerify.tirack" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="tirack" container="N" readonly="true"><span></span><script></script></div></div><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="sender">Sender</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="senderErrorBox"></div><input type="TEXT" name="USS_sender" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="sender" ng-model="$SingnatureVerify.signatureVerify.sender" maxlength="60" min="0" value="" maxcol="1" col="1" dflt="" errorbox="senderErrorBox" label="Sender" title="" xpath="$SingnatureVerify.signatureVerify.sender" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="sender" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="receiver">Receiver</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="receiverErrorBox"></div><input type="TEXT" name="USS_receiver" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="receiver" ng-model="$SingnatureVerify.signatureVerify.receiver" maxlength="60" min="0" value="" maxcol="1" col="2" dflt="" errorbox="receiverErrorBox" label="Receiver" title="" xpath="$SingnatureVerify.signatureVerify.receiver" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="receiver" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="amount">Amount</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="amountErrorBox"></div><input type="TEXT" name="USS_amount" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="amount" ng-model="$SingnatureVerify.signatureVerify.amount" maxlength="60" min="0" value="" maxcol="1" col="3" dflt="" errorbox="amountErrorBox" label="Amount" title="" xpath="$SingnatureVerify.signatureVerify.amount" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="amount" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="currency">Currency</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="currencyErrorBox"></div><input type="TEXT" name="USS_currency" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="currency" ng-model="$SingnatureVerify.signatureVerify.currency" maxlength="60" min="0" value="" maxcol="1" col="4" dflt="" errorbox="currencyErrorBox" label="Currency" title="" xpath="$SingnatureVerify.signatureVerify.currency" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="currency" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="intermediateBic">Intermediate Bic</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="intermediateBicErrorBox"></div><input type="TEXT" name="USS_intermediateBic" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="intermediateBic" ng-model="$SingnatureVerify.signatureVerify.intermediateBic" maxlength="60" min="0" value="" maxcol="1" col="5" dflt="" errorbox="intermediateBicErrorBox" label="Intermediate Bic" title="" xpath="$SingnatureVerify.signatureVerify.intermediateBic" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="intermediateBic" container="N" readonly="true"><span></span><script></script></div></div></div></div>'
+          ,
           controller: 'signatureVerifyController'
         }
       },
@@ -487,8 +446,8 @@ define([
 
         'pageSubContext@result': {
           template: heaerieUssServiceProvider.GenHtmlTemplateFromSJson('result', 'Y', 'BACK')
-            // template:'<div id="" class="bcontainer" tabindex="-1"><div id="" class="bheader" tabindex="-1"><a>Signature Verify </a></div><div id="" class="bsession" tabindex="-1"><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="signatureVerify"></label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="signatureVerifyErrorBox"></div><input type="hidden" name="signatureVerify" class="clabel" xml="Y" mndf="N" datatype="CONTAINER" htmltype="CONTAINER" id="signatureVerify" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="signatureVerifyErrorBox" label="" title="" xpath="$SingnatureVerify.signatureVerify" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="SingnatureVerify" xmlname="signatureVerify" container="Y" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="tirack">TIRACK</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="tirackErrorBox"></div><input type="TEXT" name="USS_tirack" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="tirack" ng-model="$SingnatureVerify.signatureVerify.tirack" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="tirackErrorBox" label="TIRACK" title="" xpath="$SingnatureVerify.signatureVerify.tirack" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="tirack" container="N" readonly="true"><span></span><script></script></div></div><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="sender">Sender</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="senderErrorBox"></div><input type="TEXT" name="USS_sender" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="sender" ng-model="$SingnatureVerify.signatureVerify.sender" maxlength="60" min="0" value="" maxcol="1" col="1" dflt="" errorbox="senderErrorBox" label="Sender" title="" xpath="$SingnatureVerify.signatureVerify.sender" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="sender" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="receiver">Receiver</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="receiverErrorBox"></div><input type="TEXT" name="USS_receiver" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="receiver" ng-model="$SingnatureVerify.signatureVerify.receiver" maxlength="60" min="0" value="" maxcol="1" col="2" dflt="" errorbox="receiverErrorBox" label="Receiver" title="" xpath="$SingnatureVerify.signatureVerify.receiver" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="receiver" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="amount">Amount</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="amountErrorBox"></div><input type="TEXT" name="USS_amount" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="amount" ng-model="$SingnatureVerify.signatureVerify.amount" maxlength="60" min="0" value="" maxcol="1" col="3" dflt="" errorbox="amountErrorBox" label="Amount" title="" xpath="$SingnatureVerify.signatureVerify.amount" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="amount" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="currency">Currency</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="currencyErrorBox"></div><input type="TEXT" name="USS_currency" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="currency" ng-model="$SingnatureVerify.signatureVerify.currency" maxlength="60" min="0" value="" maxcol="1" col="4" dflt="" errorbox="currencyErrorBox" label="Currency" title="" xpath="$SingnatureVerify.signatureVerify.currency" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="currency" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="intermediateBic">Intermediate Bic</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="intermediateBicErrorBox"></div><input type="TEXT" name="USS_intermediateBic" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="intermediateBic" ng-model="$SingnatureVerify.signatureVerify.intermediateBic" maxlength="60" min="0" value="" maxcol="1" col="5" dflt="" errorbox="intermediateBicErrorBox" label="Intermediate Bic" title="" xpath="$SingnatureVerify.signatureVerify.intermediateBic" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="intermediateBic" container="N" readonly="true"><span></span><script></script></div></div></div></div>'
-            ,
+          // template:'<div id="" class="bcontainer" tabindex="-1"><div id="" class="bheader" tabindex="-1"><a>Signature Verify </a></div><div id="" class="bsession" tabindex="-1"><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="signatureVerify"></label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="signatureVerifyErrorBox"></div><input type="hidden" name="signatureVerify" class="clabel" xml="Y" mndf="N" datatype="CONTAINER" htmltype="CONTAINER" id="signatureVerify" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="signatureVerifyErrorBox" label="" title="" xpath="$SingnatureVerify.signatureVerify" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="SingnatureVerify" xmlname="signatureVerify" container="Y" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="tirack">TIRACK</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="tirackErrorBox"></div><input type="TEXT" name="USS_tirack" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="tirack" ng-model="$SingnatureVerify.signatureVerify.tirack" maxlength="60" min="0" value="" maxcol="1" col="0" dflt="" errorbox="tirackErrorBox" label="TIRACK" title="" xpath="$SingnatureVerify.signatureVerify.tirack" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="tirack" container="N" readonly="true"><span></span><script></script></div></div><div class="row tableRow" style="margin-left: 0px;margin-right: 0px;" tabindex="-1"><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="sender">Sender</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="senderErrorBox"></div><input type="TEXT" name="USS_sender" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="sender" ng-model="$SingnatureVerify.signatureVerify.sender" maxlength="60" min="0" value="" maxcol="1" col="1" dflt="" errorbox="senderErrorBox" label="Sender" title="" xpath="$SingnatureVerify.signatureVerify.sender" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="sender" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="receiver">Receiver</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="receiverErrorBox"></div><input type="TEXT" name="USS_receiver" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="receiver" ng-model="$SingnatureVerify.signatureVerify.receiver" maxlength="60" min="0" value="" maxcol="1" col="2" dflt="" errorbox="receiverErrorBox" label="Receiver" title="" xpath="$SingnatureVerify.signatureVerify.receiver" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="receiver" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="amount">Amount</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="amountErrorBox"></div><input type="TEXT" name="USS_amount" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="amount" ng-model="$SingnatureVerify.signatureVerify.amount" maxlength="60" min="0" value="" maxcol="1" col="3" dflt="" errorbox="amountErrorBox" label="Amount" title="" xpath="$SingnatureVerify.signatureVerify.amount" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="amount" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="currency">Currency</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="currencyErrorBox"></div><input type="TEXT" name="USS_currency" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="currency" ng-model="$SingnatureVerify.signatureVerify.currency" maxlength="60" min="0" value="" maxcol="1" col="4" dflt="" errorbox="currencyErrorBox" label="Currency" title="" xpath="$SingnatureVerify.signatureVerify.currency" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="currency" container="N" readonly="true"><span></span><script></script></div><div class="clearfix visible-xs-block"></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><label class="chlabel" for="intermediateBic">Intermediate Bic</label></div><div id="td" class="col-md-6 col-sm-6 col-xs-12"><div id="intermediateBicErrorBox"></div><input type="TEXT" name="USS_intermediateBic" class="clabel" xml="Y" mndf="N" datatype="VARCHAR" htmltype="TEXT" id="intermediateBic" ng-model="$SingnatureVerify.signatureVerify.intermediateBic" maxlength="60" min="0" value="" maxcol="1" col="5" dflt="" errorbox="intermediateBicErrorBox" label="Intermediate Bic" title="" xpath="$SingnatureVerify.signatureVerify.intermediateBic" onclick="onClick(this);" onblure="onBlure(this);" onkeydown="onKeyDown(this);" onkeyup="onKeyUp(this);" onkeypress="onKeyPress(this);" onchange="onChange(this);" task="NONE" parent="signatureVerify" xmlname="intermediateBic" container="N" readonly="true"><span></span><script></script></div></div></div></div>'
+          ,
           controller: 'resultController'
         }
       },
@@ -652,89 +611,34 @@ define([
          * @returns {object} user - token and id of user
          */
         addState: function (title, controllerAs, templatePrefix) {
-
-          /* $stateProvider.state('dashboard.' + title, {
-                        url: '/' + title,
-                        views: {
-                            'dashboardModule@dashboard': {
-                                templateUrl: PATHS.DASHBOARD + (templatePrefix ? templatePrefix + '/' : '/') + title + '/' + title + '.view.html',
-                                controller: controllerAs ? controllerAs : null
-                            }
-                        }
-                    });
-*/
-
-          // alert('dynamic State Add');
           $stateProvider.state('basicDetUSSNavi', {
             url: '/basicDetUSSNavi',
             views: {
-
               'pageMainContext': {
-
-                //template : heaerieUssServiceProvider.GenHtmlTemplateFromSJson('N')
                 templateUrl: 'js/lib/views/naviView.html'
               },
-
               'pageSubContext@basicDetUSSNavi': {
-
                 template: heaerieUssServiceProvider.GenHtmlTemplateFromSJson('basicDet', 'Y', 'SAVE')
-                  //template : '<form name="myForm" > <label for="exampleInput">Pick a date in 2013:</label> <input type="date" id="exampleInput" name="input" ng-model="example.value"placeholder="yyyy-MM-dd" min="2013-01-01" max="2016-12-31" required /> <div role="alert"> <span class="error" ng-show="myForm.input.$error.required"> Required!</span> <span class="error" ng-show="myForm.input.$error.date"> Not a valid date!</span> </div> <tt>value = {{example.value | date: "yyyy-MM-dd"}}</tt><br/> <tt>myForm.input.$valid = {{myForm.input.$valid}}</tt><br/> <tt>myForm.input.$error = {{myForm.input.$error}}</tt><br/> <tt>myForm.$valid = {{myForm.$valid}}</tt><br/> <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/> </form>'//heaerieUssServiceProvider.GenHtmlTemplateFromSJson('Y','SAVE') ,controller :  'basicDetController'
-                  ,
-                controller: 'basicDetController' //template : 'this is test'
-                // templateUrl : 'view/loginView.html'
+                , controller: 'basicDetController' 
               }
             }
           });
-
-
-
         }
       }
     }
   });
 
   webApp.run(['$rootScope', '$q', '$injector', '$window', function ($rootScope, $q, $injector, $window) {
-
-    //$rootScope.$state = $state;
     $rootScope.goUrl = function (stateToGo) {
-
-      //alert('I am in stateToGo' );
-      //console.log(angular.toJson($state.get()));
-      // console.log($injector.get('$state').get());
-
       if (stateToGo == 'registerUSSBack') {
-
         $injector.get('$state').go('login');
       } else if (stateToGo == 'logout') {
-
         $window.sessionStorage.clear();
         $injector.get('$state').go('login');
       } else {
         $injector.get('$state').go(stateToGo);
       }
-
-
-
     }
   }]);
-
-
-  /*
-
-
-     */
-
-  /*
-
-
-      webApp.config(['$resourceProvider', function($resourceProvider) {
-    // Don't strip trailing slashes from calculated URLs
-    alert('alert config');
-    $resourceProvider.defaults.stripTrailingSlashes = false;
-  }]);
-
-  */
-
-
   return webApp;
 });

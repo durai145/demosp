@@ -1,8 +1,7 @@
 <div class="row">
 	<div class="col-sm-6">
-		<!--form name="dynForm" xmlname="Dashboard" class="cform" width="100"!-->
 		<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+			<a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
 			<a class="nav-link" id="v-pills-SchemaJsonOutputId-tab" data-toggle="pill" href="#v-pills-SchemaJsonOutputId" role="tab" aria-controls="v-pills-SchemaJsonOutputId" aria-selected="false">SchemaJsonOutputId</a>
 			<a class="nav-link" id="v-pills-SchemaJsonInputId-tab" data-toggle="pill" href="#v-pills-SchemaJsonInputId" role="tab" aria-controls="v-pills-SchemaJsonInputId" aria-selected="false">SchemaJsonInputId</a>
 			<a class="nav-link" id="v-pills-parentId-tab" data-toggle="pill" href="#v-pills-parentId" role="tab" aria-controls="v-pills-parentId" aria-selected="false">parentId</a>
@@ -12,8 +11,7 @@
 			<a class="nav-link" id="v-pills-XMLJsonId-tab" data-toggle="pill" href="#v-pills-XMLJsonId" role="tab" aria-controls="v-pills-XMLJsonId" aria-selected="false">XMLJsonId</a>
 			<a class="nav-link" id="v-pills-ListValId-tab" data-toggle="pill" href="#v-pills-ListValId" role="tab" aria-controls="v-pills-ListValId" aria-selected="false">ListValId</a>
 			<a class="nav-link" id="v-pills-TvlId-tab" data-toggle="pill" href="#v-pills-TvlId" role="tab" aria-controls="v-pills-TvlId" aria-selected="false">TvlId</a>
-			<a class="nav-link" id="v-pills-ScriptId-tab" data-toggle="pill" href="#v-pills-ScriptId" role="tab" aria-controls="v-pills-ScriptId" aria-selected="false">ScriptId</a>
-			
+			<a class="nav-link active" id="v-pills-ScriptId-tab" data-toggle="pill" href="#v-pills-ScriptId" role="tab" aria-controls="v-pills-ScriptId" aria-selected="false">ScriptId</a>
 		  </div>
 		  <div class="tab-content" id="v-pills-tabContent">
 			<div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -53,11 +51,12 @@
 				<textarea id="TvlId" placeholder="TvlId" style="width:100%;height:600px;border:1px solid grey"></textarea>
 			</div>
 			<div class="tab-pane fade" id="v-pills-ScriptId" role="tabpanel" aria-labelledby="v-pills-ScriptId-tab">
-				<textarea id="ScriptId" placeholder="ScriptId" style="width:100%;height:600px;border:1px solid grey"></textarea>
+				<textarea id="ScriptId"  style="width:100%;height:600px;border:1px solid grey"></textarea>
+
 				<input type="button" id="ExecScriptId" parent="hometran" task="EXECSCRIPT" value="ExecScript" ng-click="ExecScript(this)">
 			</div>
 		  </div>
-
+		  	
 		<center>
 			<table>
 				<!--tr>

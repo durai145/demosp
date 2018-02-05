@@ -796,12 +796,23 @@ define([],
         $scope.GenFrameB();
         TvlId.value = JSON.stringify($scope.encodeSchemaToTvl(outPut), null, 4);
       }
-
-
-
       PreView = function (obj) {
         us.Preview(obj);
       }
+      $scope.$watch('$viewContentLoaded', function(){
+        require(['vs/editor/editor.main'], function() {
+          var editor = monaco.editor.create(document.getElementById('ScriptId'), {
+            value: [
+              $window.sessionStorage.getItem("ussScript")
+            ].join('\n'),
+            language: 'javascript'
+            , theme : 'vs-dark'
+          });
+          $scope.editor=editor;
+         });
+         alert(document.getElementById('ScriptId').value)
+      });
+
     }];
 
   });

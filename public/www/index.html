@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Money Bank</title>
+  <title>HEAERIE SECURE MAIL SERVICE</title>
   <!--link rel="stylesheet" href="css/app.css"-->
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/body.css">
@@ -20,7 +20,11 @@
 </head>
   <script src="js/Resource.js"></script>  
   <script src="js/lib/external/requirejs/require.js" data-main="js/main.js"></script>
-<body class="login_background">
+  <script src="../../../../external/monaco-editor-samples/node_modules/monaco-editor/dev/vs/loader.js"></script>
+  <script>
+    require.config({ paths: { 'vs': '../../../../external/monaco-editor-samples/node_modules/monaco-editor/dev/vs' }});
+  </script>
+  <body class="login_background">
 	 <form name="dynForm"  novalidate>
 	<div class="fluid-container">
  
