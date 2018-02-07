@@ -123,7 +123,7 @@ define(function (require, exports, module) {
       this.desc = '',
       this.htmlType = 'text', /* newly introduced in USS05*/
       this.entitle = 'READONLY'; // Editable /Readonly
-      this.enttlname = 0xFF, //Entitle name to db
+    this.enttlname = 0xFF, //Entitle name to db
       this.editorRole = 0xFF, // Editable Role
       this.mndf = 'N',
       this.dataType = 'VARCHAR', // NUMBER/VARCHAR/DATE/EMAIL/AMOUNT/LIST/DIV/
@@ -154,7 +154,7 @@ define(function (require, exports, module) {
       this.dimensionMin = "", /*[]*/
       this.dataCategory = '',
       this.iconListVal = "|true|fa fa-check-circle|false|fa fa-times-circle"
-      this.camelCase = true
+    this.camelCase = true
 
   }
   USS.prototype.USSCreareTab_ = function () {
@@ -742,7 +742,7 @@ define(function (require, exports, module) {
     //alert('CreateField : 001');
     try {
       pre_cust_CreateField(fieldObj, USSTableRow)
-    } catch (e) {}
+    } catch (e) { }
 
     //try
     {
@@ -768,7 +768,6 @@ define(function (require, exports, module) {
           this.tableBodyTd1 = document.createElement("div");
           this.tableBodyTd1.id = "td";
           this.tableBodyTd1.className = 'col-sm-' + this.ceil(12 / (fieldObj.maxCol * 1)) + ' ' + 'col-md-' + this.ceil(12 / (fieldObj.maxCol * 1)) + ' col-xs-12 ';
-
           this.tableBodyTd2 = document.createElement("div");
           this.tableBodyTd2.id = "td";
           this.tableBodyTd2.className = 'col-sm-' + this.ceil(12 / (fieldObj.maxCol * 1)) + ' ' + 'col-xs-12  col-md-' + +this.ceil(12 / (fieldObj.maxCol * 1));
@@ -776,18 +775,16 @@ define(function (require, exports, module) {
           this.tableBodyTd1 = document.createElement("div");
           this.tableBodyTd1.id = "td";
           this.tableBodyTd1.className = 'col-md-' + parseInt(12 / (fieldObj.maxCol * 2)) + ' col-sm-' + parseInt(12 / (fieldObj.maxCol * 2)) + ' ' + 'col-xs-12';
-
           this.tableBodyTd2 = document.createElement("div");
           this.tableBodyTd2.id = "td";
           this.tableBodyTd2.className = 'col-md-' + parseInt(12 / (fieldObj.maxCol * 2)) + ' col-sm-' + parseInt(12 / (fieldObj.maxCol * 2)) + ' ' + 'col-xs-12';
 
         }
+
         if ((fieldObj.dataType == 'HIDDEN') || (fieldObj.dataType == 'XMLCONTAINER') || (fieldObj.dataType == 'BUTTON')) {
           //don't include the lable for hidden
           ;
         } else {
-
-
           this.tableBodyLabel = document.createElement("label");
           if (fieldObj.parentHtmlType == 'TABLE') {
             this.tableBodyLabel.className = 'cclabel';
@@ -807,103 +804,32 @@ define(function (require, exports, module) {
           }
 
         }
+
         if (fieldObj.htmlType == 'LIST') {
-          this.tableBodySelect = document.createElement("select");
-          this.tableBodySelect.className = 'clabel';
-          this.tableBodySelect.name = fieldObj.name;
-          this.tableBodySelect.for = fieldObj.name;
-          var inpStrArr = fieldObj.listVal.split('|');
-          for (var i = 0; i < inpStrArr.length; i += 2) {
-            if (fieldObj.dflt == inpStrArr[i]) {
-              this.tableBodyOption = document.createElement("option");
-              this.tableBodyOption.value = inpStrArr[i];
-              this.tableBodyOption.setAttribute('selected', 'true');
-              this.tableBodyOption.appendChild(document.createTextNode(inpStrArr[i + 1]));
-              this.tableBodyOption.id = "option";
-            } else {
-              this.tableBodyOption = document.createElement("option");
-              this.tableBodyOption.value = inpStrArr[i];
-              this.tableBodyOption.appendChild(document.createTextNode(inpStrArr[i + 1]));
-              this.tableBodyOption.id = "option";
-            }
-            this.tableBodySelect.appendChild(this.tableBodyOption);
-          }
-          this.tableBodyElmnt = this.tableBodySelect;
+          this.tableBodyElmnt = this.createListField(fieldObj);
         } else if (fieldObj.htmlType == 'DIV') {
-          this.tableBodyElmnt = document.createElement("div");
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = '';
-          this.tableBodyElmntImg = document.createElement("img");
-          this.tableBodyElmntImg.src = "../img/loading.gif";
-          this.tableBodyElmnt.appendChild(this.tableBodyElmntImg);
+          this.tableBodyElmnt = this.createDivField(fieldObj);
+
         } else if (fieldObj.htmlType == 'BUTTON') {
-          this.tableBodyElmnt = document.createElement("button");
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'ctable';
-          this.tableBodyElmnt.appendChild(document.createTextNode(fieldObj.dflt));
+          this.tableBodyElmnt = this.createButtonField(fieldObj);
         } else if (fieldObj.htmlType == 'ICON') {
-          this.tableBodyElmnt = document.createElement("i");
-          this.tableBodyElmnt.name = fieldObj.name;
-          var iconListJson = this.listValToJson(fieldObj.iconListVal);
-          if (iconListJson[fieldObj.dflt] != undefined) {
-            this.tableBodyElmnt.className = iconListJson[fieldObj.dflt];
-          } else {
-            this.tableBodyElmnt.className = "fa fa-exclamation";
-          }
+          this.tableBodyElmnt = this.createIconField(fieldObj);
         } else if (fieldObj.htmlType == 'LOB') {
-          this.tableBodyElmnt = document.createElement("textarea");
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'ctable';
+          this.tableBodyElmnt = this.createLobField(fieldObj);
         } else if (fieldObj.htmlType == 'HIDDEN') {
-          this.tableBodyElmnt = document.createElement("input");
-          this.tableBodyElmnt.type = "hidden";
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'ctable';
+          this.tableBodyElmnt = this.createHideField(fieldObj);
         } else if (fieldObj.htmlType == 'LABEL') {
-          this.tableBodyElmnt = document.createElement("input");
-          this.tableBodyElmnt.type = "text";
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'clabel';
-          this.tableBodyElmnt.readonly = true;
-          this.tableBodyElmnt.setAttribute('readonly', 'true');
+          this.tableBodyElmnt = this.createLableField(fieldObj);
+
         } else if (fieldObj.htmlType == 'PASSWORD') {
-          this.tableBodyElmnt = document.createElement("input");
-          this.tableBodyElmnt.type = "password";
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'ctable';
+          this.tableBodyElmnt = this.createPasswordField(fieldObj);
+
         } else if (fieldObj.htmlType == 'OPTION') {
-          this.tableBodyElmnt = document.createElement("input");
-          this.tableBodyElmnt.type = "hidden";
-          this.tableBodyElmnt.setAttribute("readonly", "true");
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'ctable';
-          var inpStrArr = fieldObj.listVal.split('|');
-          var fldStr = "";
-          var rtString = "";
-          for (var i = 0; i < inpStrArr.length; i += 2) {
-            if (fieldObj.entitle == 'READONLY') {
-              if (fieldObj.dflt == inpStrArr[i]) {
-                fldStr = '<div class="col-sm-6" > <input disabled="true" type="radio" checked=true dataType="' + fieldObj.dataType + '" htmlType="' + fieldObj.htmlType + '"    xmlname="' + fieldObj.name + '" name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"  > <label class="clabel" >' + inpStrArr[i + 1] + '</label > </div>';
-              } else {
-                fldStr = '<div class="col-sm-6" >  <input disabled="true"   type="radio" dataType="' + fieldObj.dataType + '"   xmlname="' + fieldObj.name + '" htmlType="' + fieldObj.htmlType + '"   name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"  >  <label class="clabel" >' + inpStrArr[i + 1] + '</label >  </div>';
-              }
-            } else {
-              if (fieldObj.dflt == inpStrArr[i]) {
-                fldStr = ' <div class="col-sm-6" >  <input  type="radio" checked=true dataType="' + fieldObj.dataType + '" htmlType="' + fieldObj.htmlType + '"    xmlname="' + fieldObj.name + '" name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"   >  <label class="clabel" >' + inpStrArr[i + 1] + '</label >  </div>';
-              } else {
-                fldStr = '<div class="col-sm-6" >  <input  type="radio" dataType="' + fieldObj.dataType + '"   xmlname="' + fieldObj.name + '" htmlType="' + fieldObj.htmlType + '"              name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"  >  <label class="clabel" >' + inpStrArr[i + 1] + '</label >  </div>';
-              }
-            }
-            rtString += fldStr;
-          }
-          this.tableBodyElmntRadio = document.createElement("div");
-          this.tableBodyElmntRadio.innerHTML = rtString;
+          this.tableBodyElmnt = this.createOptionField(fieldObj);
         } else if (fieldObj.htmlType == 'CONTAINER' || fieldObj.htmlType == 'PAGE' || fieldObj.htmlType == 'hidden') {
-          this.tableBodyElmnt = document.createElement("input");
-          this.tableBodyElmnt.type = "hidden";
-          this.tableBodyElmnt.name = fieldObj.name;
-          this.tableBodyElmnt.className = 'ctable';
+          this.tableBodyElmnt = this.createHideField(fieldObj);
         } else if (fieldObj.htmlType == 'FILE') {
+
           this.tableBodyElmnt = document.createElement("input");
           this.tableBodyElmnt.type = "FILE";
           this.tableBodyElmnt.name = fieldObj.group + '_' + fieldObj.name;
@@ -919,25 +845,31 @@ define(function (require, exports, module) {
             rtString += fldStr;
           }
           this.tableBodyElmntDesc.innerHTML = rtString;
+
         } else {
+
           this.tableBodyElmnt = document.createElement("input");
           this.tableBodyElmnt.type = "TEXT";
           this.tableBodyElmnt.name = fieldObj.group + '_' + fieldObj.name;
           this.tableBodyElmnt.className = 'ctext';
+
           var fldStr = "";
           var rtString = "";
           if (fieldObj.help == 'Y') {
             fldStr = '<a id=link   HREF="javascript:onClickLink(\'' + fieldObj.name + '\',\'' + this.helpLink + ' \',\'calender\');"> <img src="../img/' + this.helpLink + '.png" width="20px" height="20px" />  </a>';
             rtString += fldStr;
           }
+
           if (fieldObj.desc == 'Y') {
             fldStr = '<input type="text"  readonly class="label" name="' + fieldObj.name + 'Desc"     xmlname="' + fieldObj.name + 'Desc" id="' + fieldObj.name + 'Desc" xml="' + fieldObj.xml + '"  parent="' + fieldObj.parent + '" dataType="LABEL" value=""  label="' + fieldObj.label + '"  >';
             rtString += fldStr;
           }
+
           this.tableBodyElmntDesc.innerHTML = rtString;
         }
       }
     }
+
     this.clearfix = document.createElement("div");
     this.clearfix.className = "clearfix visible-xs-block";
     this.clearfix.innerHTML = "";
@@ -947,6 +879,7 @@ define(function (require, exports, module) {
     if ((fieldObj.htmlType != 'DIV') && (fieldObj.htmlType != 'ICON')) {
       this.tableBodyElmnt.className = 'ctext';
     }
+
     this.tableBodyElmnt.setAttribute("xml", fieldObj.xml);
     this.tableBodyElmnt.setAttribute("mndf", fieldObj.mndf);
     this.tableBodyElmnt.setAttribute("dataType", fieldObj.dataType);
@@ -964,12 +897,10 @@ define(function (require, exports, module) {
     }
     this.tableBodyElmnt.setAttribute("maxlength", fieldObj.max);
     this.tableBodyElmnt.setAttribute("min", fieldObj.min);
-    console.log("this.tableBodyElmnt");
-    console.log(this.tableBodyElmnt);
-    console.log(fieldObj);
 
-    if (fieldObj.htmlType != 'FILE')
+    if (fieldObj.htmlType != 'FILE') {
       this.tableBodyElmnt.value = fieldObj.dflt;
+    }
 
     if (fieldObj.mndf == 'Y') {
       this.tableBodyElmnt.setAttribute("required", "");
@@ -983,7 +914,7 @@ define(function (require, exports, module) {
     this.tableBodyElmnt.setAttribute("label", fieldObj.label);
     this.tableBodyElmnt.setAttribute("title", fieldObj.tips);
     this.tableBodyElmnt.setAttribute("Xpath", fieldObj.Xpath);
-    this.tableBodyElmnt.onchange = fieldObj.onchange;
+    //this.tableBodyElmnt.onchange = fieldObj.onchange;
     this.tableBodyElmnt.setAttribute("onclick", fieldObj.onclick);
     this.tableBodyElmnt.setAttribute("onblure", fieldObj.onblure);
     this.tableBodyElmnt.setAttribute("onkeydown", fieldObj.onkeydown);
@@ -1010,19 +941,13 @@ define(function (require, exports, module) {
       this.tableBodyElmnt.setAttribute('readonly', 'true');
       if (fieldObj.htmlType == 'LIST') {
         this.tableBodyElmnt.setAttribute('disabled', 'true');
-
       }
-
     }
 
-    if ((fieldObj.dataType == 'PAGE') || (fieldObj.dataType == 'HIDDEN') || (fieldObj.dataType == 'XMLCONTAINER') || (fieldObj.dataType == 'BUTTON') || (fieldObj.parentHtmlType == 'TABLE')) {} else {
+    if ((fieldObj.dataType == 'PAGE') || (fieldObj.dataType == 'HIDDEN') || (fieldObj.dataType == 'XMLCONTAINER') || (fieldObj.dataType == 'BUTTON') || (fieldObj.parentHtmlType == 'TABLE')) { } else {
       this.tableBodyTd1.appendChild(this.tableBodyLabel);
 
     }
-
-
-
-
     if (fieldObj.htmlType == 'OPTION') {
       this.tableBodyTd2.appendChild(this.tableBodyElmntRadio);
     }
@@ -1030,15 +955,8 @@ define(function (require, exports, module) {
     this.tableBodyTd2.appendChild(this.tableErrorBox);
 
     if (fieldObj.htmlType == 'DIV') {
-
-
-      jsfunc = "	 div='" + fieldObj.name + "';";
-      //jsfunc += "	 url='getMotherTongue.php';";
-      // str.substring(0,1).toUpperCase() + str.substring(1,str.length).toLowerCase(); 
-      //jsfunc += "	 url='get"+ fieldObj.name.substring(0,1)+ fieldObj.name.substring(1,fieldObj.name.length) +".php';";
-      jsfunc += "	 url='../service/" + fieldObj.name.substring(0, 1).toUpperCase() + fieldObj.name.substring(1, fieldObj.name.length) + "';";
-      //jsfunc += "	 json={USRID:glUserId, GROUPID:glGroupId ,class:'ctext' ,name:'Religion'  ,class:'ctext' ,xml:'N' ,mndf:'N' ,datatype:'VARCHAR' ,htmltype:'DIV' ,id : 'religion' ,errorbox :'religionErrorBox' ,label : 'Religion' ,title :'' ,onchange :'onChange(this)' ,onclick :'onClick(this)' ,onblure :'onBlure(this)' ,onkeydown : 'onKeyDown(this)' ,onkeyup :'onKeyUp(this)' ,onkeypress :'onKeyPress(this)' ,task : 'NONE' };";
-
+      jsfunc = " div='" + fieldObj.name + "';";
+      jsfunc += "	url='../service/" + fieldObj.name.substring(0, 1).toUpperCase() + fieldObj.name.substring(1, fieldObj.name.length) + "';";
       var jsonObj = {
         USRID: glUserId,
         GROUPID: glGroupId,
@@ -1091,10 +1009,127 @@ define(function (require, exports, module) {
 
     try {
       post_cust_CreateField(fieldObj, USSTableRow);
-    } catch (e) {}
+    } catch (e) { }
 
     return USSTableRow;
   }
+
+  USS.prototype.createLabelField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("input");
+    this.tableBodyElmnt.type = "text";
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = 'clabel';
+    this.tableBodyElmnt.readonly = true;
+    this.tableBodyElmnt.setAttribute('readonly', 'true');
+    return this.tableBodyElmnt;
+  }
+
+  USS.prototype.createHideField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("input");
+    this.tableBodyElmnt.type = "hidden";
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = 'ctable';
+    return this.tableBodyElmnt;
+  }
+
+  USS.prototype.createLobField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("textarea");
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = 'ctable';
+    return this.tableBodyElmnt;
+  }
+
+  USS.prototype.createIconField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("i");
+    this.tableBodyElmnt.name = fieldObj.name;
+    var iconListJson = this.listValToJson(fieldObj.iconListVal);
+    if (iconListJson[fieldObj.dflt] != undefined) {
+      this.tableBodyElmnt.className = iconListJson[fieldObj.dflt];
+    } else {
+      this.tableBodyElmnt.className = "fa fa-exclamation";
+    }
+    return this.tableBodyElmnt;
+  }
+
+  USS.prototype.createDivField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("div");
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = '';
+    this.tableBodyElmntImg = document.createElement("img");
+    this.tableBodyElmntImg.src = "../img/loading.gif";
+    this.tableBodyElmnt.appendChild(this.tableBodyElmntImg);
+    return this.tableBodyElmnt;
+  }
+
+  USS.prototype.createListField = function (fieldObj) {
+    this.tableBodySelect = document.createElement("select");
+    this.tableBodySelect.className = 'clabel';
+    this.tableBodySelect.name = fieldObj.name;
+    this.tableBodySelect.for = fieldObj.name;
+    var inpStrArr = fieldObj.listVal.split('|');
+    for (var i = 0; i < inpStrArr.length; i += 2) {
+      if (fieldObj.dflt == inpStrArr[i]) {
+        this.tableBodyOption = document.createElement("option");
+        this.tableBodyOption.value = inpStrArr[i];
+        this.tableBodyOption.setAttribute('selected', 'true');
+        this.tableBodyOption.appendChild(document.createTextNode(inpStrArr[i + 1]));
+        this.tableBodyOption.id = "option";
+      } else {
+        this.tableBodyOption = document.createElement("option");
+        this.tableBodyOption.value = inpStrArr[i];
+        this.tableBodyOption.appendChild(document.createTextNode(inpStrArr[i + 1]));
+        this.tableBodyOption.id = "option";
+      }
+      this.tableBodySelect.appendChild(this.tableBodyOption);
+    }
+    return this.tableBodySelect;
+  }
+  USS.prototype.createButtonField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("button");
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = 'ctable';
+    this.tableBodyElmnt.appendChild(document.createTextNode(fieldObj.dflt));
+    return this.tableBodyElmnt;
+  }
+
+  USS.prototype.createOptionField = function () {
+    this.tableBodyElmnt = document.createElement("input");
+    this.tableBodyElmnt.type = "hidden";
+    this.tableBodyElmnt.setAttribute("readonly", "true");
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = 'ctable';
+    var inpStrArr = fieldObj.listVal.split('|');
+    var fldStr = "";
+    var rtString = "";
+    for (var i = 0; i < inpStrArr.length; i += 2) {
+      if (fieldObj.entitle == 'READONLY') {
+        if (fieldObj.dflt == inpStrArr[i]) {
+          fldStr = '<div class="col-sm-6" > <input disabled="true" type="radio" checked=true dataType="' + fieldObj.dataType + '" htmlType="' + fieldObj.htmlType + '"    xmlname="' + fieldObj.name + '" name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"  > <label class="clabel" >' + inpStrArr[i + 1] + '</label > </div>';
+        } else {
+          fldStr = '<div class="col-sm-6" >  <input disabled="true"   type="radio" dataType="' + fieldObj.dataType + '"   xmlname="' + fieldObj.name + '" htmlType="' + fieldObj.htmlType + '"   name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"  >  <label class="clabel" >' + inpStrArr[i + 1] + '</label >  </div>';
+        }
+      } else {
+        if (fieldObj.dflt == inpStrArr[i]) {
+          fldStr = ' <div class="col-sm-6" >  <input  type="radio" checked=true dataType="' + fieldObj.dataType + '" htmlType="' + fieldObj.htmlType + '"    xmlname="' + fieldObj.name + '" name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"   >  <label class="clabel" >' + inpStrArr[i + 1] + '</label >  </div>';
+        } else {
+          fldStr = '<div class="col-sm-6" >  <input  type="radio" dataType="' + fieldObj.dataType + '"   xmlname="' + fieldObj.name + '" htmlType="' + fieldObj.htmlType + '"              name="' + fieldObj.name + '"  parent="' + fieldObj.parent + '" id="' + fieldObj.name + '"  value="' + inpStrArr[i] + '"  >  <label class="clabel" >' + inpStrArr[i + 1] + '</label >  </div>';
+        }
+      }
+      rtString += fldStr;
+    }
+    this.tableBodyElmntRadio = document.createElement("div");
+    this.tableBodyElmntRadio.innerHTML = rtString;
+    return this.tableBodyElmntRadio;
+  }
+  USS.prototype.createPasswordField = function (fieldObj) {
+    this.tableBodyElmnt = document.createElement("input");
+    this.tableBodyElmnt.type = "password";
+    this.tableBodyElmnt.name = fieldObj.name;
+    this.tableBodyElmnt.className = 'ctable';
+    return this.tableBodyElmnt;
+  }
+
+
 
   USS.prototype.GenSJson = function (parentId) {
     var fieldObj = new this.USSField_();
@@ -1764,7 +1799,7 @@ define(function (require, exports, module) {
     divCurrDivPreViewHeader.setAttribute("class", "TreeContainerSchema");
 
     var divCurrDivPreViewSession = this.CreateField(fieldObj, divCurrDivPreViewSession);
-    if (fieldObj.htmlType == "CONTAINER" ||fieldObj.htmlType == "TABLE" || fieldObj.htmlType == "PAGE") {
+    if (fieldObj.htmlType == "CONTAINER" || fieldObj.htmlType == "TABLE" || fieldObj.htmlType == "PAGE") {
       childDiv.setAttribute("class", "bTreeContainer");
     } else {
       childDiv.className = "bmargin";
@@ -1867,7 +1902,7 @@ define(function (require, exports, module) {
     } else {
       curObj.style.display = 'none'
     }
-    
+
   }
 
   USS.prototype.AddChild = function (parentObj, fieldObj) {
@@ -1877,40 +1912,40 @@ define(function (require, exports, module) {
   }
 
   USS.prototype.listValToJson = function (listVal) {
-		var retJson = {};
-		var key = "";
-		listVal.split("|").forEach(function (listValObj, i) {
-			if (i % 2 == 0) {
-				key = listValObj;
-			} else {
-				if (key == "") {
-					retJson["NONE"] = "NONE";
-				} else {
-					retJson[key] = listValObj;
-				}
-			}
-		}, this);
-		return retJson;
-	}
-
-	USS.prototype.jsonToListVal = function (list, obj) {
-		var listArr = list.split('|');
-		var returnStr = "";
-		try {
-
-			for (var i = 0; i < listArr.length; i += 2) {
-				if (i == 0) {
-					returnStr += listArr[i] + "|" + obj[listArr[i]];
-				} else {
-					returnStr += "|" + listArr[i] + "|" + obj[listArr[i]];
-				}
-			}
-		} catch (e) {
-			console.log("jsonToListVal:Exception" + e);
-		}
-		return returnStr
+    var retJson = {};
+    var key = "";
+    listVal.split("|").forEach(function (listValObj, i) {
+      if (i % 2 == 0) {
+        key = listValObj;
+      } else {
+        if (key == "") {
+          retJson["NONE"] = "NONE";
+        } else {
+          retJson[key] = listValObj;
+        }
+      }
+    }, this);
+    return retJson;
   }
-  
+
+  USS.prototype.jsonToListVal = function (list, obj) {
+    var listArr = list.split('|');
+    var returnStr = "";
+    try {
+
+      for (var i = 0; i < listArr.length; i += 2) {
+        if (i == 0) {
+          returnStr += listArr[i] + "|" + obj[listArr[i]];
+        } else {
+          returnStr += "|" + listArr[i] + "|" + obj[listArr[i]];
+        }
+      }
+    } catch (e) {
+      console.log("jsonToListVal:Exception" + e);
+    }
+    return returnStr
+  }
+
   exports.USS = USS;
   /*
   exports.USS.USSSetScript_				=ussObj.USSSetScript_				;

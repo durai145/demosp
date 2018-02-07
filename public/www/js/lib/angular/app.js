@@ -13,12 +13,6 @@ define([
 ], function (controllers, services) {
   'use strict';
 
-  console.log('controllers in app');
-  console.log(controllers);
-
-  //console.log('ufi in app');
-  //console.log(ufi);
-
   var webApp = angular.module('app', [
     'controllers', 'ngRoute', 'toaster', 'services', 'ui.router', 'ngAnimate'
     //,'$http'
@@ -33,9 +27,6 @@ define([
 
   webApp.provider('heaerieUssService', function heaerieUssServiceProvider() {
     var GenHtmlTemplateFromSJson = false;
-
-
-
     this.GenHtmlTemplateFromSJson = function (jsonSchema, value, mode) {
       var USS = require("ufi.core").USS;
       var ufiframegen = require("ufi.frameGen");
@@ -140,9 +131,6 @@ define([
       }
     });
 
-
-
-
     $stateProvider.state('SchemaGenerator', {
       url: '/SchemaGenerator/',
       views: {
@@ -158,9 +146,7 @@ define([
           //template : heaerieUssServiceProvider.GenHtmlTemplateFromSJson('basicDet','N',"FULL") //EIDT and ADD
           //template : 'this is test'
           templateUrl: 'js/lib/views/SchemaGenerator.html'
-
-          ,
-          controller: 'SchemaGeneratorController'
+          ,controller: 'SchemaGeneratorController'
         }
 
 
@@ -181,7 +167,6 @@ define([
         },
 
         'pageSubContext@basicDetUSSAdd': {
-
           template: heaerieUssServiceProvider.GenHtmlTemplateFromSJson('basicDet', 'Y', 'ADD'),
           controller: 'basicDetController'
           //template : 'this is test'
@@ -611,6 +596,17 @@ define([
          * @returns {object} user - token and id of user
          */
         addState: function (title, controllerAs, templatePrefix) {
+
+          /* $stateProvider.state('dashboard.' + title, {
+                        url: '/' + title,
+                        views: {
+                            'dashboardModule@dashboard': {
+                                templateUrl: PATHS.DASHBOARD + (templatePrefix ? templatePrefix + '/' : '/') + title + '/' + title + '.view.html',
+                                controller: controllerAs ? controllerAs : null
+                            }
+                        }
+                    });
+*/
           $stateProvider.state('basicDetUSSNavi', {
             url: '/basicDetUSSNavi',
             views: {
