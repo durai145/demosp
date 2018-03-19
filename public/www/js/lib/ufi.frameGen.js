@@ -333,10 +333,15 @@ define(function (require, exports, module) {
 					var objEvalStr = recObj[recSchObj.name];
 					if (parseInt(recSchObj.enttlname) & parseInt(role)) {
 						if (this.hasChild(recSchObj)) {
-
-							lv_rtStr = this.frameGenerationV1(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode, role);
-							lv_str += this.sprint(lv_rtStr);
-							lv_str += this.sprint("USSSession" + level + ".appendChild(USSContainer" + (level + 1) + ");");
+							if (this.isField(recSchObj)) {
+								lv_rtStr = this.fieldGenerateV1(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode, role);
+								lv_str += this.sprint(lv_rtStr);
+								lv_str += this.sprint('USSSession' + level + '.appendChild(USSTableRow' + level + ');');
+							} else {
+								lv_rtStr = this.frameGenerationV1(listValObjEvalStr, labelObjEvalStr, objEvalStr, recSchObj.childs, recSchObj, level + 1, func, recSchCnt, mode, role);
+								lv_str += this.sprint(lv_rtStr);
+								lv_str += this.sprint("USSSession" + level + ".appendChild(USSContainer" + (level + 1) + ");");
+							}
 						} else {
 							recSchObj.maxCol = parent.maxCol;
 							//recSch, varStrVal, varLabelStrVal, varStrListVal, func, level, mode, role
@@ -353,7 +358,36 @@ define(function (require, exports, module) {
 		this.debug(level + "_" + parentCnt + " end ##### frameGeneration V1 ###### ");
 		return lv_str;
 	}
+	FG.prototype.fieldGenerateV1 = function (
+		listVal, recLabel, rec, recSch, parent, level, func, parentCnt, mode, role
+	) {
+		lv_str = "";
+		this.debug(level + "_" + parentCnt + " start ##### fieldGenerateV1 ###### ");
+		/*
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<div class="row tableRow">
+					<div class="col-md-3 col-sm-2 col-xs-2">
+						<input type="checkbox">
+					</div>
+					<div class="col-md-3 col-sm-2 col-xs-2">
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+					</div>	
+					<div class="col-md-3 col-sm-2 col-xs-2">
+					<i class="fa fa-exclamation" aria-hidden="true"></i>
+					</div>
+					
+					<div class="col-md-3 col-sm-2 col-xs-2">
+						<i class="fa fa-paperclip" aria-hidden="true"></i>
+					</div>
+				</div>
+			</div>
+		*/
+        lv_str='<div class="col-md-2 col-sm-2 col-xs-2"> <div class="row tableRow"> <div class="col-md-3 col-sm-2 col-xs-2"> <input type="checkbox"> </div> <div class="col-md-3 col-sm-2 col-xs-2"> <i class="fa fa-star-o" aria-hidden="true"></i> </div> <div class="col-md-3 col-sm-2 col-xs-2"> <i class="fa fa-exclamation" aria-hidden="true"></i> </div> <div class="col-md-3 col-sm-2 col-xs-2"> <i class="fa fa-paperclip" aria-hidden="true"></i> </div> </div> </div>';
 
+		this.debug(level + "_" + parentCnt + " start ##### fieldGenerateV1 ###### ");
+		return lv_str;
+
+	}
 	FG.prototype.valWithSch = function (rec, recSch) {
 		for (var r = 0; r < rec.length; r++) {
 			for (var s = 0; s < recSch.length; s++) {

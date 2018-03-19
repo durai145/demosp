@@ -1,86 +1,58 @@
 define([],
-function()
-{
+  function () {
 
-	return [ '$scope' , 'toaster','SchemaGeneratorService','$state', '$window', function($scope,toaster,SchemaGeneratorService,$state, $window){   
-   $scope.$watch('$viewContentLoaded', function(){
-    require(['vs/editor/editor.main'], function() {
-      var editor = monaco.editor.create(document.getElementById('ScriptId'), {
-        value: [
-          $window.sessionStorage.getItem("ussScript")
-        ].join('\n'),
-        language: 'javascript'
-        , theme : 'vs-dark'
+    return ['$scope', 'toaster', 'SchemaGeneratorService', '$state', '$window', function ($scope, toaster, SchemaGeneratorService, $state, $window) {
+      $scope.$watch('$viewContentLoaded', function () {
+        require(['vs/editor/editor.main'], function () {
+          var editor = monaco.editor.create(document.getElementById('ScriptId'), {
+            value: [
+              $window.sessionStorage.getItem("ussScript")
+            ].join('\n'),
+            language: 'javascript',
+            theme: 'vs-dark'
+          });
+          $scope.editor = editor;
+
+          var htmlEditor = monaco.editor.create(document.getElementById('HtmlId'), {
+            value: [
+              $window.sessionStorage.getItem("ussHtml")
+            ].join('\n'),
+            language: 'html',
+            theme: 'vs-dark'
+          });
+          $scope.htmlEditor = htmlEditor;
+        });
       });
-      $scope.editor=editor;
- //     alert(editor);
-  //    console.log(editor);
-    });
- 
-  //  monaco.editor.setTheme('vs-dark');
-   });
 
-
-   function ExecScript() {
-       var script = document.createElement("script");
-       //scr.appendChild(commonHeader + vcommonFrameGen + commonTailer);
-       script.type = 'text/javascript';
-      var ScriptId=document.getElementById('ScriptId');
-       script.text = $scope.editor.getValue();
-       document.getElementById('middleid').appendChild(script);
-
-     }
-
-     $scope.ExecScript=ExecScript;
-	}];
-	
-});
-
-/*[
-
- toasterService.pop('success', "title", "text");
-      var url = "/authorize"; 
-      var config =  { 
-          headers: {
-            "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJIZWFlcmllIEdTTCIsImF1ZCI6Ind3dy5teXJvb21leHBlbnNlLmNvbSIsImlhdCI6IjYwbXMifQ.G37Yj8ljUjbOf-kSyc4j3-YAlbseb1KET9CMBgbJfaE"
-           ,'Authorization': 'Basic dGVzdDp0ZXN0'
-            ,      'Content-Type': 'application/x-www-form-urlencoded'
-            ,'Access-Control-Allow-Origin': false
-
-            
-        }
-      };
-      var dataJson = 
-      {
-        "email" : "durai145@live.in"
-        ,"password" : "1qaz2wsx"
-        ,"grantType": "password"
-            ,"clientId" : "CLIENTSP"
-            ,"scope" : "GSA"
-            ,"redirectURI" :"http://localhost:5000"
-      };
-
-    /*
-    $.post(url , dataJson , function (resp,status,xhr){
-
-        alert("resp" + status);
-
-    },dataType);
-
-
-  $http.post(url,dataJson,config).then(function (response) 
-    { 
-     // alert("resp");
-      console.log(response);
-      alert(JSON.stringify(response));
-    },function(data){
-
-      if(data.status == 302)
-      {
-
-        alert("Invalid request");
+      function ExecScript() {
+        var script = document.createElement("script");
+        script.type = 'text/javascript';
+        var ScriptId = document.getElementById('ScriptId');
+        script.text = $scope.editor.getValue();
+        document.getElementById('middleid').appendChild(script);
       }
-     });
-    };
 
-]*/
+      function ExecHtml() {
+        $scope.htmlEditor.getValue();
+        var childObj = document.createElement("div");
+        childObj.innerHTML = $scope.htmlEditor.getValue();
+        document.getElementById('middleid').appendChild(childObj);
+      }
+
+      function GenHtml() {
+        var ussScript = $scope.editor.getValue();
+        var ufiframegen = require("ufi.frameGen");
+        var ufivalidate = require("ufi.validate");
+        var $ = require("jquery");
+        var us = new ufiframegen.FG();
+        var dynFGCall = (new Function("return function(us) {" + ussScript + "\n return USSContainer0 " + "};"))();
+        var appendObj = dynFGCall(us);
+        $scope.htmlEditor.setValue("<div class='pageLayout'> <div class='bcontainer'>" + appendObj.innerHTML + "</div></div>");
+      }
+
+      $scope.ExecScript = ExecScript;
+      $scope.GenHtml = GenHtml;
+      $scope.ExecHtml = ExecHtml;
+    }];
+
+  });

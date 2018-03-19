@@ -302,19 +302,14 @@ define([
       views: {
 
         'pageMainContext': {
-
-          //template : heaerieUssServiceProvider.GenHtmlTemplateFromSJson('N')
           templateUrl: 'js/lib/views/naviView.html',
           controller: 'naviController'
         },
 
         'pageSubContext@basicDetUSSNew': {
-
           template: heaerieUssServiceProvider.GenHtmlTemplateFromSJson('basicDet', 'Y', 'NEW'),
           controller: 'basicDetController'
-          //template : 'this is test'
-          // templateUrl : 'view/loginView.html'
-        }
+         }
       },
       params: {
         $basicDet: {}

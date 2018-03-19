@@ -2,14 +2,23 @@
 
 <!--div id="ScriptId"  style="width:800px;height:600px;border:1px solid grey"></div-->
 <div id="ScriptId"  style="width:100%;height:600px;border:1px solid grey"></div>
-
+<div id="HtmlId"  style="width:100%;height:600px;border:1px solid grey"></div>
 <table>
 	<tr>
 		<td>
 			<input type="button" id="ExecScriptId" parent="hometran" task="EXECSCRIPT" value="ExecScript" ng-click="ExecScript(this)">
 		</td>
+		<td>
+			<input type="button" id="ExecHtmlId" parent="hometran" task="EXECHTML" value="GenHtml" ng-click="GenHtml(this)">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="button" id="ExecHtmlId" parent="hometran" task="EXECHTML" value="ExecHtmlId" ng-click="ExecHtml(this)">
+		</td>
 	</tr>
 </table>
+
 <div id="middleid">
 	Preview:
 </div>

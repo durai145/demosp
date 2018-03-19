@@ -639,17 +639,11 @@ function validInput(req, callback) {
 
 
 	addCoreFunction(req, function (req) {
-
-		//var contentType = response.getHeader('content-type');
-
-		//console.log(req);
 		var accessToken = req.getHeader("x-access-token");
-
 		var grantType = req.getParam("grantType");
 		var clientId = req.getParam("clientId");
 		var scope = req.getParam("scope");
 		var state = req.getHeader("user-agent");
-
 		var respObj = {
 			respCode: 0,
 			respDescr: "",
@@ -666,16 +660,11 @@ function validInput(req, callback) {
 			scope: "",
 			state: ""
 		};
-
 		respObj.state = state;
 		if (respObj.accessToken != null) {
 			respObj.isAccessTokenFound = true;
 		}
-
-
-
 		/*need To be introduce table*/
-
 		if (grantType == "password") {
 			respObj.isValidGrantType = true;
 			respObj.grantType = grantType;
@@ -706,11 +695,6 @@ function validInput(req, callback) {
 			respObj.SCOPE = scope;
 			respObj.error = "Invalid Scope";
 		}
-
-
-
-
-
 		//res.respObj= respObj;
 		log.info("in validate input :resp OBJ:")
 		console.log(respObj);
@@ -726,12 +710,7 @@ function validInput(req, callback) {
 
 
 function authvalidInput(req, callback) {
-
-
 	addCoreFunction(req, function (req) {
-
-		//var contentType = response.getHeader('content-type');
-
 		console.log(req);
 		var accessToken = req.getHeader("x-access-token");
 
@@ -761,11 +740,7 @@ function authvalidInput(req, callback) {
 		if (respObj.accessToken != null) {
 			respObj.isAccessTokenFound = true;
 		}
-
-
-
 		/*need To be introduce table*/
-
 		if (grantType == "password") {
 			respObj.isValidGrantType = true;
 			respObj.grantType = grantType;
@@ -796,19 +771,11 @@ function authvalidInput(req, callback) {
 			respObj.SCOPE = scope;
 			respObj.error = "Invalid Scope";
 		}
-
-
-
-
-
 		//res.respObj= respObj;
 		log.info("in validate input :resp OBJ:")
 		console.log(respObj);
-
 		callback(req, respObj);
-
 	});
-
 }
 
 

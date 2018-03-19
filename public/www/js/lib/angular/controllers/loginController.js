@@ -10,7 +10,7 @@ define([],
       $scope.uss_submit = function () {
 
 
-         $window.sessionStorage.setItem("grpName", "NA");
+        $window.sessionStorage.setItem("grpName", "NA");
         $window.sessionStorage.setItem("firstName", "DURAIMURUGAN");
         $window.sessionStorage.setItem("lastName", "GOVINDARAJ");
         $window.sessionStorage.setItem("prodVersion", "1");

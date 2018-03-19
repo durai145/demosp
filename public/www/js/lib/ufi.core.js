@@ -43,10 +43,6 @@ define(function (require, exports, module) {
     this.rowserFirefox = false;
     this.browserSafari = false;
     this.location = "" + window.location;
-
-
-    //alert(navigator.userAgent);
-
     if (navigator.userAgent.indexOf("MSIE") > -1) {
       this.browserIE = true;
     } else if ((navigator.userAgent.indexOf("Firefox/") > -1)) {
@@ -116,14 +112,14 @@ define(function (require, exports, module) {
 
   USS.prototype.USSField_ = function () {
 
-    this.group = 'USS', /*it has been changed by author on 02-Feb-2010*/
+      this.group = 'USS', /*it has been changed by author on 02-Feb-2010*/
       this.name = '',
       this.label = '',
       this.task = 'NONE',
       this.desc = '',
       this.htmlType = 'text', /* newly introduced in USS05*/
       this.entitle = 'READONLY'; // Editable /Readonly
-    this.enttlname = 0xFF, //Entitle name to db
+      this.enttlname = 0xFF, //Entitle name to db
       this.editorRole = 0xFF, // Editable Role
       this.mndf = 'N',
       this.dataType = 'VARCHAR', // NUMBER/VARCHAR/DATE/EMAIL/AMOUNT/LIST/DIV/
@@ -723,6 +719,15 @@ define(function (require, exports, module) {
     }
   }
 
+  USS.prototype.isField = function (fieldObj) {
+
+    if (fieldObj.htmlType == "FIELD") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   USS.prototype.hasChild = function (fieldObj) {
     if (Array.isArray(fieldObj.childs)) {
       if (fieldObj.childs.length == 0) {
@@ -739,12 +744,10 @@ define(function (require, exports, module) {
     var fldStr = "";
     var jsfunc = "";
 
-    //alert('CreateField : 001');
     try {
       pre_cust_CreateField(fieldObj, USSTableRow)
     } catch (e) { }
 
-    //try
     {
       if (fieldObj.htmlType == "") {
         alert("[" + fieldObj.name + "] " + FLDFCF00001);
@@ -809,7 +812,6 @@ define(function (require, exports, module) {
           this.tableBodyElmnt = this.createListField(fieldObj);
         } else if (fieldObj.htmlType == 'DIV') {
           this.tableBodyElmnt = this.createDivField(fieldObj);
-
         } else if (fieldObj.htmlType == 'BUTTON') {
           this.tableBodyElmnt = this.createButtonField(fieldObj);
         } else if (fieldObj.htmlType == 'ICON') {

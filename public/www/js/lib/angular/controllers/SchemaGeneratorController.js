@@ -108,7 +108,7 @@ define([],
           
           script.text = commonHeader + vcommonFrameGen + commonTailer;
           document.getElementById('middleid').appendChild(script);
-          $window.sessionStorage.setItem("ussScript",commonHeader + vcommonFrameGen + commonTailer);
+          $window.sessionStorage.setItem("ussScript", vcommonFrameGen );
           document.getElementById('ScriptId').value= commonHeader + vcommonFrameGen + commonTailer;
         }
         catch (e) {
