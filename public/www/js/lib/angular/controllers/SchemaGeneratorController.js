@@ -6,19 +6,16 @@ define([],
       var ufiuss = require('ufi.core');
       var ufiframegen = require('ufi.frameGen');
       var ufixml = require('ufi.xml');
+      var ufischema = require('ufi.schema');
       var us = new ufiuss.USS();
-
+      us.context = $scope.getContext();
+    
       var $newdiv1 = $("<div id='object1'/> Dynamic body</div>")
       var newdiv2 = document.createElement("div");
       
 
-      newdiv2.id = "middleid";
-      //alert("main1");
-
-
-      $scope.GenJsonB = function (obj) {
-
-        //alert('GenJsonB');//SchemaJsonInputId/SchemaJsonInputId
+        newdiv2.id = "middleid";
+        $scope.GenJsonB = function (obj) {
         obj = this;
         var SchemaJsonInputId = document.getElementById("SchemaJsonInputId");
         var OutJsonTextId = document.getElementById("OutJsonTextId");
@@ -28,8 +25,6 @@ define([],
         var PageNameIdLabel = document.getElementById("PageNameIdLabel");
         try {
           schemaJson = eval(SchemaJsonInputId.value);
-
-
           var ufiframegen = require('ufi.frameGen');
           var us = new ufiframegen.FG();
 
@@ -44,8 +39,6 @@ define([],
       }
 
       $scope.GenFrameB = function (obj) {
-
-
         obj = this;
         var SchemaJsonInputId = document.getElementById("SchemaJsonInputId");
         var OutJsonTextId = document.getElementById("OutJsonTextId");
@@ -119,7 +112,6 @@ define([],
       }
 
       $scope.genResourceB = function () {
-        //alert("Gen Resource");
         var us = new ufiframegen.FG();
 
         var SchemaJsonInputId = document.getElementById("SchemaJsonInputId");

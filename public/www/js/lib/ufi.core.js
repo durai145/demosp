@@ -9,6 +9,7 @@ define(function (require, exports, module) {
     this.USSScript = "";
     this.ContinerCount = 1;
     this.resourcesPath = "";
+    this.context;
   }
 
   USS.prototype.USSGetScript_ = function (script) {
@@ -1352,6 +1353,7 @@ define(function (require, exports, module) {
     childShowDiv.id = "ContainerShow" + childDiv.id;
     childShowDiv.className = "ContainerShow";
     parentid = parentid;
+
     var divCurrDivName = document.createElement("input");
     divCurrDivName.setAttribute("parentid", parentid);
     divCurrDivName.setAttribute("attribute", "name");
@@ -1387,6 +1389,40 @@ define(function (require, exports, module) {
     divCurrDivIdParentName.setAttribute("placeholder", "name");
     divCurrDivIdParentName.setAttribute("value", parentid);
     divCurrDivIdParentName.setAttribute("title", "Parent Id");
+
+    var 
+    divCurrDivId$Ref = document.createElement("input");
+    var divCurrDivId$Ref = document.createElement("select");
+    divCurrDivId$Ref.setAttribute("parentid", parentid);
+    divCurrDivId$Ref.setAttribute("baseid", childDiv.id);
+    divCurrDivId$Ref.setAttribute("attribute", "Mndf");
+    divCurrDivId$Ref.setAttribute("id", childDiv.id + "Mndf" + "Id");
+    divCurrDivId$Ref.setAttribute("mndf", "Y");
+    divCurrDivId$Ref.setAttribute("childCount", "0");
+    divCurrDivId$Ref.setAttribute("type", "container");
+    divCurrDivId$Ref.setAttribute("placeholder", "Mndf");
+    divCurrDivId$Ref.setAttribute("value", fieldObj.mndf);
+    divCurrDivId$Ref.setAttribute("class", "bmandatory");
+    divCurrDivId$Ref.setAttribute("title", "mndf");
+    
+    console.log(this.context);
+    var inpStr = "|";
+    
+    for (var key in this.context) {
+      inpStr+= "|" + key + "|" + key.split("#")[1]
+    }
+    var inpStrArr = inpStr.split("|");
+    var divCurrDivId$RefOption = "";
+    for (var i = 0; i < inpStrArr.length; i += 2) {
+      divCurrDivId$RefOption = document.createElement("option");
+      divCurrDivId$RefOption.value = inpStrArr[i];
+      divCurrDivId$RefOption.appendChild(document.createTextNode(inpStrArr[i + 1]));
+      divCurrDivId$RefOption.id = "option";
+      if (inpStrArr[i] == fieldObj.mndf) {
+        divCurrDivId$RefOption.setAttribute('selected', 'true');
+      }
+      divCurrDivId$Ref.appendChild(divCurrDivId$RefOption);
+    }
 
     var divCurrDivMax = document.createElement("input");
     divCurrDivMax.setAttribute("parentid", parentid);
@@ -1837,6 +1873,7 @@ define(function (require, exports, module) {
     childHideDiv.appendChild(divButtonHide);
     childHideDiv.appendChild(divButtonAddChild);
     childHideDiv.appendChild(divButtonPreview);
+    childHideDiv.appendChild(divCurrDivId$Ref);
     this.fontawesome = document.createElement('i');
     this.fontawesome.className = "fa fa-eraser";
     this.divClosePreview = document.createElement("div");

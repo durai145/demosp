@@ -3,20 +3,9 @@ function()
 {
 
 	return [ '$scope' , 'toaster','SchemaGeneratorService','$state','ussService',function($scope,toaster,SchemaGeneratorService,$state,ussService){
-
-
-
-
-     alert("ussService");
-     alert(ussService);
 	
 		$scope.basicDetEditSave=function()
     	{
-
-
-       // console.log($scope);
-
-    			
     		alert('basicDetEditSave :name =' + $scope.name);
 
         SchemaGeneratorService.save({     "grantType"     : "password" 
